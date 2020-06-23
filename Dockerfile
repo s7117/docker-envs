@@ -22,6 +22,7 @@ RUN locale-gen en_US.UTF-8
 # Create a new user
 RUN adduser s7117 --shell /bin/zsh --disabled-password --home /home/s7117 --gecos ""
 RUN usermod -aG sudo s7117
+RUN echo 'temp2020' | passwd s7117 --stdin
 
 # Configure git
 
@@ -42,4 +43,5 @@ WORKDIR /home/s7117
 # NOTES:
 # docker run --hostname docker -it <image_id> /bin/zsh
 # docker exec --hostname docker -it 1559ccc07e79 /bin/zsh
+# docker pull s7117/ubuntu_20_04_env:latest
 
