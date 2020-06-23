@@ -22,7 +22,7 @@ RUN locale-gen en_US.UTF-8
 # Create a new user
 RUN adduser s7117 --shell /bin/zsh --disabled-password --home /home/s7117 --gecos ""
 RUN usermod -aG sudo s7117
-RUN echo 'temp2020' | passwd s7117 --stdin
+RUN echo 's7117:temp2020' | chpasswd
 
 # Configure git
 
