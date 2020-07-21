@@ -44,4 +44,4 @@ WORKDIR /home/s7117
 # docker run --hostname docker -it <image_id> /bin/zsh
 # docker exec --hostname docker -it 1559ccc07e79 /bin/zsh
 # docker pull s7117/ubuntu_20_04_env:latest
-
+CMD zsh
