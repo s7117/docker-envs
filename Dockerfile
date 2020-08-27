@@ -35,6 +35,7 @@ RUN su - s7117 -c 'sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/o
 RUN su - s7117 -c 'sed -i "s/robbyrussell/agnoster/g" .zshrc'
 RUN su - s7117 -c 'echo "source ~/OSConfig/ubuntu/.zshrc_custom" >> ~/.zshrc'
 RUN su - s7117 -c 'cp ~/OSConfig/ubuntu/agnoster.zsh-theme ~/.oh-my-zsh/themes'
+RUN su - s7117 -c 'cp ~/OSConfig/ubuntu/.vimrc ~'
 
 # Switch shell to zsh
 USER s7117
