@@ -42,15 +42,23 @@ RUN su - s7117 -c 'echo "source ~/OSConfig/ubuntu/.zshrc_custom" >> ~/.zshrc'
 RUN su - s7117 -c 'cp ~/OSConfig/ubuntu/agnoster.zsh-theme ~/.oh-my-zsh/themes'
 RUN su - s7117 -c 'cp ~/OSConfig/ubuntu/.vimrc ~'
 
-# Configure SSH
+# Configure SSH for the user.
+RUN su - s7117 -c 'mkdir ~/.ssh'
+RUN su - s7117 -c 'touch ~/.ssh/authorized_keys'
+# Add the public keys to the authorized ssh keys for the user.
+# Duplicate the following command for every ssh key you wish to add.
+RUN su - s7117 -c 'echo "" >> ~/.ssh/authorized_keys'
+
 RUN mkdir /var/run/sshd
 RUN echo 'root:THEPASSWORDYOUCREATED' | chpasswd
-RUN sed -i 's/#*PermitRootLogin prohibit-password/PermitRootLogin no/g' /etc/ssh/sshd_config
+RUN sed -i 's/#PermitRootLogin.*/PermitRootLogin no\nAllowUsers s7117\nDenyUsers root/g' /etc/ssh/sshd_config
+RUN sed -i 's/.*PubkeyAuthentication.*/PubkeyAuthentication yes/g' /etc/ssh/sshd_config
+RUN sed -i 's/.*PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
 # SSH login fix. Otherwise user is kicked off after login
 RUN sed -i 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' /etc/pam.d/sshd
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
-EXPOSE 117
+EXPOSE 22
 
 # Copy over the startup script
 COPY startup.sh /root/startup.sh
