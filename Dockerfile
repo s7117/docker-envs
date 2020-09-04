@@ -73,3 +73,4 @@ ENTRYPOINT "/root/startup.sh"
 # docker run -t -d --restart unless-stopped --name ubuntu_main s7117/ubuntu_20_04_env
 # docker inspect-f "{{ .NetworkSettings.IPAddress }}" <container_name>
 # docker exec -u s7117 -w /home/s7117 -ti test_sshd /bin/zsh
+# docker run -d -P --restart unless-stopped --name ubuntu_main --hostname docker-infinite s7117/ubuntu_20_04_env
