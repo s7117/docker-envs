@@ -1,4 +1,3 @@
-# BE SURE TO Add "DOCKER_OPTS="--iptables=false" to /etc/default/docker
 FROM ubuntu:20.04
 
 # Set Timezone
@@ -20,6 +19,11 @@ RUN apt install locales -y
 RUN apt install zsh-syntax-highlighting -y
 RUN apt install zsh-autosuggestions -y
 RUN apt install ssh -y
+RUN apt install build-essential libssl-dev zlib1g-dev libbz2-dev -y
+RUN apt install libreadline-dev libsqlite3-dev wget curl llvm -y
+RUN apt install libncurses5-dev libncursesw5-dev xz-utils tk-dev -y
+RUN apt install libffi-dev liblzma-dev python-openssl -y
+RUN apt install g++ make -y
 
 # Set locale
 RUN locale-gen en_US.UTF-8
@@ -42,13 +46,18 @@ RUN su - s7117 -c 'echo "source ~/OSConfig/ubuntu/.zshrc_custom" >> ~/.zshrc'
 RUN su - s7117 -c 'cp ~/OSConfig/ubuntu/agnoster.zsh-theme ~/.oh-my-zsh/themes'
 RUN su - s7117 -c 'cp ~/OSConfig/ubuntu/.vimrc ~'
 
+# Install Pyenv
+RUN su - s7117 -c 'curl https://pyenv.run | zsh'
+RUN echo 'export PATH="/home/s7117/.pyenv/bin:$PATH"' >> /home/s7117/.zshrc
+RUN echo 'eval "$(pyenv init -)"' >> /home/s7117/.zshrc
+RUN echo 'eval "$(pyenv virtualenv-init -)"' >> /home/s7117/.zshrc
+
 # Configure SSH for the user.
 RUN su - s7117 -c 'mkdir ~/.ssh'
 RUN su - s7117 -c 'touch ~/.ssh/authorized_keys'
 # Add the public keys to the authorized ssh keys for the user.
 # Duplicate the following command for every ssh key you wish to add.
 RUN su - s7117 -c 'echo "" >> ~/.ssh/authorized_keys'
-
 RUN mkdir /var/run/sshd
 RUN echo 'root:THEPASSWORDYOUCREATED' | chpasswd
 RUN sed -i 's/#PermitRootLogin.*/PermitRootLogin no\nAllowUsers s7117\nDenyUsers root/g' /etc/ssh/sshd_config
@@ -73,3 +82,4 @@ ENTRYPOINT "/root/startup.sh"
 # docker run -t -d --restart unless-stopped --name ubuntu_main s7117/ubuntu_20_04_env
 # docker inspect-f "{{ .NetworkSettings.IPAddress }}" <container_name>
 # docker exec -u s7117 -w /home/s7117 -ti test_sshd /bin/zsh
+# docker run -d -P --restart unless-stopped --name ubuntu_main --hostname docker-infinite s7117/ubuntu_20_04_env
