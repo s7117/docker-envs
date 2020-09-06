@@ -1,4 +1,5 @@
 # Ubuntu 20.04 Docker Development Environment
+*** Be sure to change the password for the user immediately after creating the container! ***
 
 ## Configuration/Installation
 1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop).
