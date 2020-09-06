@@ -5,25 +5,25 @@ ENV TZ=America/New_York
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Update
-RUN apt update -y
-RUN apt upgrade -y
+RUN apt-get update -y
+RUN apt-get upgrade -y
 
 # Install Packages
-RUN apt install sudo -y
-RUN apt install vim -y
-RUN apt install zsh -y
-RUN apt install git -y
-RUN apt install wget -y
-RUN apt install curl -y
-RUN apt install locales -y
-RUN apt install zsh-syntax-highlighting -y
-RUN apt install zsh-autosuggestions -y
-RUN apt install ssh -y
-RUN apt install build-essential libssl-dev zlib1g-dev libbz2-dev -y
-RUN apt install libreadline-dev libsqlite3-dev wget curl llvm -y
-RUN apt install libncurses5-dev libncursesw5-dev xz-utils tk-dev -y
-RUN apt install libffi-dev liblzma-dev python-openssl -y
-RUN apt install g++ make -y
+RUN apt-get install sudo -y
+RUN apt-get install vim -y
+RUN apt-get install zsh -y
+RUN apt-get install git -y
+RUN apt-get install wget -y
+RUN apt-get install curl -y
+RUN apt-get install locales -y
+RUN apt-get install zsh-syntax-highlighting -y
+RUN apt-get install zsh-autosuggestions -y
+RUN apt-get install ssh -y
+RUN apt-get install build-essential libssl-dev zlib1g-dev libbz2-dev -y
+RUN apt-get install libreadline-dev libsqlite3-dev wget curl llvm -y
+RUN apt-get install libncurses5-dev libncursesw5-dev xz-utils tk-dev -y
+RUN apt-get install libffi-dev liblzma-dev python-openssl -y
+RUN apt-get install g++ make -y
 
 # Set locale
 RUN locale-gen en_US.UTF-8
