@@ -34,8 +34,6 @@ RUN usermod -aG sudo user
 RUN echo 'user:temp2020' | chpasswd
 
 # Configure git
-RUN su - user -c "git config --global user.name 'Peyton Chandarana'"
-RUN su - user -c "git config --global user.email 'peytonchandarana@gmail.com'"
 RUN su - user -c "git clone https://github.com/s7117/OSConfig"
 
 # Configure OH-MY-ZSH
