@@ -29,38 +29,38 @@ RUN apt-get install g++ make -y
 RUN locale-gen en_US.UTF-8
 
 # Create a new user
-RUN adduser s7117 --shell /bin/zsh --disabled-password --home /home/s7117 --gecos ""
-RUN usermod -aG sudo s7117
-RUN echo 's7117:temp2020' | chpasswd
+RUN adduser user --shell /bin/zsh --disabled-password --home /home/user --gecos ""
+RUN usermod -aG sudo user
+RUN echo 'user:temp2020' | chpasswd
 
 # Configure git
-RUN su - s7117 -c "git config --global user.name 'Peyton Chandarana'"
-RUN su - s7117 -c "git config --global user.email 'peytonchandarana@gmail.com'"
-RUN su - s7117 -c "git clone https://github.com/s7117/OSConfig"
+RUN su - user -c "git config --global user.name 'Peyton Chandarana'"
+RUN su - user -c "git config --global user.email 'peytonchandarana@gmail.com'"
+RUN su - user -c "git clone https://github.com/s7117/OSConfig"
 
 # Configure OH-MY-ZSH
 # NOTE: Agnoster requires you to have the Fira Code Font Family installed to use.
-RUN su - s7117 -c 'sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
-RUN su - s7117 -c 'sed -i "s/robbyrussell/agnoster/g" .zshrc'
-RUN su - s7117 -c 'echo "source ~/OSConfig/ubuntu/.zshrc_custom" >> ~/.zshrc'
-RUN su - s7117 -c 'cp ~/OSConfig/ubuntu/agnoster.zsh-theme ~/.oh-my-zsh/themes'
-RUN su - s7117 -c 'cp ~/OSConfig/ubuntu/.vimrc ~'
+RUN su - user -c 'sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
+RUN su - user -c 'sed -i "s/robbyrussell/agnoster/g" .zshrc'
+RUN su - user -c 'echo "source ~/OSConfig/ubuntu/.zshrc_custom" >> ~/.zshrc'
+RUN su - user -c 'cp ~/OSConfig/ubuntu/agnoster.zsh-theme ~/.oh-my-zsh/themes'
+RUN su - user -c 'cp ~/OSConfig/ubuntu/.vimrc ~'
 
 # Install Pyenv
-RUN su - s7117 -c 'curl https://pyenv.run | zsh'
-RUN echo 'export PATH="/home/s7117/.pyenv/bin:$PATH"' >> /home/s7117/.zshrc
-RUN echo 'eval "$(pyenv init -)"' >> /home/s7117/.zshrc
-RUN echo 'eval "$(pyenv virtualenv-init -)"' >> /home/s7117/.zshrc
+RUN su - user -c 'curl https://pyenv.run | zsh'
+RUN echo 'export PATH="/home/user/.pyenv/bin:$PATH"' >> /home/user/.zshrc
+RUN echo 'eval "$(pyenv init -)"' >> /home/user/.zshrc
+RUN echo 'eval "$(pyenv virtualenv-init -)"' >> /home/user/.zshrc
 
 # Configure SSH for the user.
-RUN su - s7117 -c 'mkdir ~/.ssh'
-RUN su - s7117 -c 'touch ~/.ssh/authorized_keys'
+RUN su - user -c 'mkdir ~/.ssh'
+RUN su - user -c 'touch ~/.ssh/authorized_keys'
 # Add the public keys to the authorized ssh keys for the user.
 # Duplicate the following command for every ssh key you wish to add.
-RUN su - s7117 -c 'echo "" >> ~/.ssh/authorized_keys'
+RUN su - user -c 'echo "" >> ~/.ssh/authorized_keys'
 RUN mkdir /var/run/sshd
 RUN echo 'root:THEPASSWORDYOUCREATED' | chpasswd
-RUN sed -i 's/#PermitRootLogin.*/PermitRootLogin no\nAllowUsers s7117\nDenyUsers root/g' /etc/ssh/sshd_config
+RUN sed -i 's/#PermitRootLogin.*/PermitRootLogin no\nAllowUsers user\nDenyUsers root/g' /etc/ssh/sshd_config
 RUN sed -i 's/.*PubkeyAuthentication.*/PubkeyAuthentication yes/g' /etc/ssh/sshd_config
 RUN sed -i 's/.*PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
 # SSH login fix. Otherwise user is kicked off after login
@@ -81,5 +81,5 @@ ENTRYPOINT "/root/startup.sh"
 # docker pull s7117/ubuntu_20_04_env:latest
 # docker run -t -d --restart unless-stopped --name ubuntu_main s7117/ubuntu_20_04_env
 # docker inspect-f "{{ .NetworkSettings.IPAddress }}" <container_name>
-# docker exec -u s7117 -w /home/s7117 -ti test_sshd /bin/zsh
+# docker exec -u user -w /home/user -ti test_sshd /bin/zsh
 # docker run -d -P --restart unless-stopped --name ubuntu_main --hostname docker-infinite s7117/ubuntu_20_04_env
