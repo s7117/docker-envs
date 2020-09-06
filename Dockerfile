@@ -33,7 +33,7 @@ RUN adduser user --shell /bin/zsh --disabled-password --home /home/user --gecos 
 RUN usermod -aG sudo user
 RUN echo 'user:temp2020' | chpasswd
 
-# Configure git
+# Get the os configs
 RUN su - user -c "git clone https://github.com/s7117/OSConfig"
 
 # Configure OH-MY-ZSH
