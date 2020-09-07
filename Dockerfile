@@ -24,6 +24,7 @@ RUN apt-get install libreadline-dev libsqlite3-dev wget curl llvm -y
 RUN apt-get install libncurses5-dev libncursesw5-dev xz-utils tk-dev -y
 RUN apt-get install libffi-dev liblzma-dev python-openssl -y
 RUN apt-get install g++ make -y
+RUN apt-get install unzip zip -y
 
 # Set locale
 RUN locale-gen en_US.UTF-8
