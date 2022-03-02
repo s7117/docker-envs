@@ -1,5 +1,8 @@
 FROM ubuntu:20.04
 
+# ENV
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Set Timezone
 ENV TZ=America/New_York
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -9,8 +12,9 @@ RUN apt-get update -y
 RUN apt-get upgrade -y
 
 # Install Packages
+RUN apt-get install apt-utils -y
 RUN apt-get install sudo -y
-RUN apt-get install vim git wget curl locales ssh htop-y
+RUN apt-get install vim git wget curl locales ssh htop -y
 RUN apt-get install zsh -y
 RUN apt-get install build-essential libssl-dev zlib1g-dev libbz2-dev -y
 RUN apt-get install libreadline-dev libsqlite3-dev wget curl llvm -y
