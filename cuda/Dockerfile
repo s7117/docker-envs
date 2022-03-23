@@ -2,6 +2,7 @@ FROM nvidia/cuda:11.6.0-devel-ubuntu20.04
 
 # ENV
 ENV DEBIAN_FRONTEND=noninteractive
+ENV DISPLAY=host.docker.internal:0.0
 
 # Set Timezone
 ENV TZ=America/New_York
@@ -21,7 +22,7 @@ RUN apt-get install libreadline-dev libsqlite3-dev wget curl llvm -y
 RUN apt-get install libncurses5-dev libncursesw5-dev xz-utils tk-dev -y
 RUN apt-get install libffi-dev liblzma-dev python-openssl -y
 RUN apt-get install g++ make unzip zip -y
-RUN apt-get install dos2unix -y
+RUN apt-get install dos2unix x11-apps -y
 
 # Set locale
 RUN locale-gen en_US.UTF-8
