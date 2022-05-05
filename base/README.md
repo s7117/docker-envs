@@ -1,4 +1,4 @@
-# Ubuntu 20.04 Docker Development Environment
+# Ubuntu Docker Development Environment
 *** Be sure to change the password for the user and root immediately after creating the container! ***
 
 ## Configuration/Installation
