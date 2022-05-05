@@ -17,8 +17,9 @@ RUN apt-get install apt-utils \
 sudo vim git wget curl locales ssh htop \
 zsh build-essential libssl-dev zlib1g-dev libbz2-dev \
 libreadline-dev libsqlite3-dev wget curl llvm \
-libncurses5-dev libncursesw5-dev xz-utils tk-dev \
-libffi-dev liblzma-dev python-openssl \
+libncurses5-dev libncursesw5-dev xz-utils tk-dev -y
+
+RUN apt-get install libffi-dev liblzma-dev python-openssl \
 g++ make unzip zip \
 dos2unix x11-apps -y
 
