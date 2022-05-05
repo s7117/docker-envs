@@ -13,4 +13,10 @@ As of now these environments are only on Ubuntu but in theory should be able to 
 - [oh-my-posh](https://github.com/jandedobbeleer/oh-my-posh) is used for the terminal prompt generation.
 - To use my oh-my-posh theme you will need to install the [FiraCode Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip). Place the fonts in `~/.fonts` and then run `fc-cache -f -v`.
 
-***NOTE: For the zsh fonts to appear correctly please install FiraCode Nerd Font.***
+## Build Instructions
+### Base
+1. `docker buildx create --name ubuntu_env --use`
+1. `docker buildx build --no-cache --tag s7117/ubuntu_env:latest --platform=linux/amd64,linux/arm64 --push .`
+
+### CUDA
+1. `docker build --no-cache --tag s7117/ubuntu_env_cuda:latest --push .`
