@@ -33,7 +33,7 @@ RUN usermod -aG sudo user
 RUN echo 'user:temp2022' | chpasswd
 
 # Get the os configs
-RUN su - user -c "git clone https://github.com/s7117/dotfiles /home/user/.dotfiles"
+RUN su - user -c "git clone https://github.com/s7117/.dotfiles.git /home/user/.dotfiles"
 
 # Clone the nvidia cuda tools
 RUN su - user -c "git clone https://github.com/NVIDIA/cuda-samples.git /home/user/cuda_samples"
