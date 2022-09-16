@@ -42,4 +42,4 @@ USER user
 WORKDIR /home/user
 
 # Command
-CMD [ "/bin/zsh" ]
+CMD [ "/bin/bash" ]
