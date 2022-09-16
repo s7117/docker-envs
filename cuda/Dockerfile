@@ -3,6 +3,7 @@ FROM nvidia/cuda:11.7.1-devel-ubuntu20.04
 # ENV
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DISPLAY=host.docker.internal:0.0
+ENV TERM=xterm-256color
 
 # Set Timezone
 ENV TZ=America/New_York
