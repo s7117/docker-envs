@@ -28,4 +28,5 @@ Before using this image please refer to the nvidia-docker documentation:
 ## Installing Other Packages:
 The user password is `temp2022`. It is advised to reset this password as soon as possible upon creating the container.
 
+## Optional Setup:
 Optionally, you can add the ```--restart unless-stopped``` to the ```docker run``` command to restart the docker container on docker startup.
