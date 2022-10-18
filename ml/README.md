@@ -15,13 +15,13 @@ If you wish to have a directory shared between the host machine and the Docker c
 
 ```docker run --gpus all --name <container_name> --hostname <hostname> --mount type=bind,source=<localdir>,target=<containerdir> -ti s7117/docker_env_ml:latest```
 
-## Configuration/Installation
+## First Time Configuration/Installation
 1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop).
 1. Start the Docker Daemon by searching for the program and starting it. It is useful to have docker always startup on login.
 1. Run ```docker pull s7117/docker_env_ml```
 1. Run ```docker run --gpus all --name <container_name> --hostname <hostname> -ti s7117/docker_env_ml```
 
-## Enter the shell via `docker exec` or `docker start`
+## Re-Enter the shell via `docker exec` or `docker start`
 - `docker start -ai <container_name>`
 - `docker exec -u user -w /home/user -ti  <container_name> /bin/bash`
 - `docker exec <container_name> <executable>`
