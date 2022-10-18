@@ -1,7 +1,9 @@
-# Ubuntu CUDA Docker Development Environment
+# Ubuntu Machine Learning Docker Development Environment
 *** Be sure to change the password for the user and root immediately after creating the container! ***
 
-# CUDA
+This Docker image contains the necessary PyTorch and TensorFlow tools pre-installed. See the Dockerfile for more info.
+
+# Machine Learning
 *** You must use the `--gpus all` argument to the `docker run` command to pass gpus access to the containter. ***
 
 Before using this image please refer to the nvidia-docker documentation:
