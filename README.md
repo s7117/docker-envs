@@ -4,8 +4,9 @@ A simple Dockerfile for an Ubuntu 20.04 development environment. Portable for us
 As of now these environments are only on Ubuntu but in theory should be able to be ported to other distros by changing the `FROM` at the beginning of the Dockerfile.
 
 ## Environments
-- [ubuntu_env](base/)
-- [ubuntu_env_cuda](cuda/)
+- [docker_env](base/) - Customized Ubuntu Development Environment
+- [docker_env_cuda](cuda/) - Customized CUDA Image
+- [docker_env_ml](ml/) - Machine Learning Image with PyTorch and TensorFlow GPU installed under Miniforge3
 
 ## Environment Considerations:
 - zsh is preinstalled into the docker container and will start unless `/bin/bash` is passed in.
