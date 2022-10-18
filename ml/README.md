@@ -1,7 +1,7 @@
 # Ubuntu Machine Learning Docker Development Environment
 *** Be sure to change the password for the user and root immediately after creating the container! ***
 
-This Docker image contains the necessary PyTorch and TensorFlow tools pre-installed. See the Dockerfile for more info.
+This Docker image contains the necessary PyTorch and TensorFlow tools pre-installed in Miniforge3 conda environments. See the Dockerfile for more info.
 
 # Machine Learning
 *** You must use the `--gpus all` argument to the `docker run` command to pass gpus access to the containter. ***
@@ -20,5 +20,12 @@ Before using this image please refer to the nvidia-docker documentation:
 - `docker start -ai <container_name>`
 - `docker exec -u user -w /home/user -ti  <container_name> /bin/zsh`
 - `docker exec <container_name> <executable>`
+
+## Conda Evironements:
+- `conda activate tfgpu` - TensorFlow GPU
+- `conda activate pytorch` - PyTorch
+
+## Installing Other Packages:
+The user password is `temp2022`. It is advised to reset this password as soon as possible upon creating the container.
 
 Optionally, you can add the ```--restart unless-stopped``` to the ```docker run``` command to restart the docker container on docker startup.
