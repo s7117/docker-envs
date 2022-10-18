@@ -21,7 +21,7 @@ Before using this image please refer to the nvidia-docker documentation:
 - `docker exec -u user -w /home/user -ti  <container_name> /bin/zsh`
 - `docker exec <container_name> <executable>`
 
-## Conda Evironements:
+## Conda Environments:
 - `conda activate tfgpu` - TensorFlow GPU
 - `conda activate pytorch` - PyTorch
 
