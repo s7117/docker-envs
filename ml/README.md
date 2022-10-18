@@ -18,7 +18,7 @@ Before using this image please refer to the nvidia-docker documentation:
 
 ## Enter the shell via `docker exec` or `docker start`
 - `docker start -ai <container_name>`
-- `docker exec -u user -w /home/user -ti  <container_name> /bin/zsh`
+- `docker exec -u user -w /home/user -ti  <container_name> /bin/bash`
 - `docker exec <container_name> <executable>`
 
 ## Conda Environments:
