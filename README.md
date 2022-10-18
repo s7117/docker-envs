@@ -17,7 +17,10 @@ As of now these environments are only on Ubuntu but in theory should be able to 
 ## Build Instructions
 ### Base
 1. `docker buildx create --name ubuntu_env --use`
-1. `docker buildx build --no-cache --tag s7117/ubuntu_env:latest --platform=linux/amd64,linux/arm64 --push .`
+1. `docker buildx build --no-cache --tag s7117/docker_env:latest --platform=linux/amd64,linux/arm64 --push .`
 
 ### CUDA
-1. `docker build --no-cache --tag s7117/ubuntu_env_cuda:latest --push .`
+1. `docker build --no-cache --tag s7117/docker_env_cuda:latest --push .`
+
+### Machine Learning
+1. `docker build --no-cache --tag s7117/docker_env_ml:latest --push .`
