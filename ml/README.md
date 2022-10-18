@@ -28,7 +28,10 @@ If you wish to have a directory shared between the host machine and the Docker c
 
 ## Conda Environments:
 - `conda activate tfgpu` - TensorFlow GPU
-- `conda activate pytorch` - PyTorch
+
+For PyTorch do the following:
+1. `conda create --name pytorch pytorch cudatoolkit=11.6
+1. `conda activate pytorch`
 
 ## Installing Other Packages:
 The user password is `temp2022`. It is advised to reset this password as soon as possible upon creating the container.
