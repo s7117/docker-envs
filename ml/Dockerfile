@@ -52,7 +52,7 @@ RUN su - user -c "/home/user/.miniforge3/bin/conda init bash"
 
 # Install ML Tools in Conda Env
 RUN su - user -c "/home/user/.miniforge3/bin/conda create --name pytorch \
-                  pytorch=1.12.1 -y"
+                  pytorch=1.12.1 cudatoolkit=11.6 -y"
 RUN su - user -c "/home/user/.miniforge3/bin/conda create --name tfgpu \
                   tensorflow-gpu"
 
