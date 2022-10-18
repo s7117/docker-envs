@@ -30,7 +30,7 @@ If you wish to have a directory shared between the host machine and the Docker c
 - `conda activate tfgpu` - TensorFlow GPU
 
 For PyTorch do the following:
-1. `conda create --name pytorch pytorch cudatoolkit=11.6
+1. `conda create --name pytorch pytorch cudatoolkit=11.6`
 1. `conda activate pytorch`
 
 ## Installing Other Packages:
