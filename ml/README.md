@@ -11,6 +11,8 @@ Before using this image please refer to the nvidia-docker documentation:
 - https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker
 
 ## Bind/Mount a Directory
+If you wish to have a directory shared between the host machine and the Docker container do the following when you run the image for the first time:  
+
 ```docker run --gpus all --name <container_name> --hostname <hostname> --mount type=bind,source=<localdir>,target=<containerdir> -ti s7117/docker_env_ml:latest```
 
 ## Configuration/Installation
