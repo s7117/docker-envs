@@ -15,7 +15,7 @@ RUN apt-get upgrade -y
 # Install Packages
 RUN apt-get install apt-utils \
 sudo vim git wget curl locales ssh htop \
-zsh build-essential libssl-dev zlib1g-dev libbz2-dev \
+build-essential libssl-dev zlib1g-dev libbz2-dev \
 libreadline-dev libsqlite3-dev wget curl llvm \
 libncurses5-dev libncursesw5-dev xz-utils tk-dev \
 libffi-dev liblzma-dev \
@@ -26,7 +26,7 @@ dos2unix x11-apps -y
 RUN locale-gen en_US.UTF-8
 
 # Create a new user
-RUN adduser user --shell /bin/zsh --disabled-password --home /home/user --gecos ""
+RUN adduser user --shell /bin/bash --disabled-password --home /home/user --gecos ""
 RUN usermod -aG sudo user
 RUN echo 'user:temp2022' | chpasswd
 
@@ -37,4 +37,4 @@ USER user
 WORKDIR /home/user
 
 # Command
-CMD [ "/bin/zsh" ]
+CMD [ "/bin/bash" ]

@@ -38,8 +38,19 @@ RUN apt-get install git libgtk2.0-dev \
   pkg-config libavcodec-dev libavformat-dev \
   libswscale-dev libatlas-base-dev python3-scipy -y
 
-USER user
 WORKDIR /home/user
+
+# Get CMAKE
+RUN su - user -c "wget https://github.com/Kitware/CMake/releases/download/v3.14.4/cmake-3.14.4.tar.gz"
+
+# Get OpenCV
+RUN su - user -c "git clone --depth 1 --branch 4.5.2-openvino https://github.com/opencv/opencv.git"
+
+# OpenVINO
+RUN su - user -c "git clone --depth 1 --branch 2021.3 https://github.com/openvinotoolkit/openvino.git"
+
+WORKDIR /home/user
+USER user
 
 # Command
 CMD [ "/bin/bash" ]
