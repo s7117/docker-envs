@@ -49,7 +49,9 @@ RUN su - user -c "git clone --depth 1 --branch 4.5.2-openvino https://github.com
 # OpenVINO
 RUN su - user -c "git clone --depth 1 --branch 2021.3 https://github.com/openvinotoolkit/openvino.git"
 
-WORKDIR /home/user
+########## DOTFILES ##########
+RUN su - user -c "git clone https://github.com/s7117/.dotfiles.git /home/user/.dotfiles"
+
 USER user
 
 # Command
