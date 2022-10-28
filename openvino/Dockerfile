@@ -33,26 +33,52 @@ RUN echo 'user:temp2022' | chpasswd
 
 ########## OPENVINO ##########
 
-# OpenCV
+# OpenCV Deps
 RUN apt-get install git libgtk2.0-dev \
   pkg-config libavcodec-dev libavformat-dev \
-  libswscale-dev libatlas-base-dev python3-scipy -y
+  libswscale-dev libatlas-base-dev python3-scipy \
+  python3-pip -y
 
-WORKDIR /home/user
+WORKDIR /root
 
 # Get CMAKE
-RUN su - user -c "wget https://github.com/Kitware/CMake/releases/download/v3.14.4/cmake-3.14.4.tar.gz"
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.14.4/cmake-3.14.4.tar.gz
+RUN tar -xvzf cmake-3.14.4.tar.gz
+WORKDIR /root/cmake-3.14.4
+RUN /root/cmake-3.14.4/bootstrap
+RUN make -j8
+RUN make install
+WORKDIR /root
 
 # Get OpenCV
-RUN su - user -c "git clone --depth 1 --branch 4.5.2-openvino https://github.com/opencv/opencv.git"
+RUN git clone --depth 1 --branch 4.5.5-openvino-2022.1.0 https://github.com/opencv/opencv.git
+RUN mkdir /root/opencv/build
+WORKDIR /root/opencv/build
+RUN cmake –DCMAKE_BUILD_TYPE=Release –DCMAKE_INSTALL_PREFIX=/usr/local ..
+RUN make -j8
+RUN make install
+WORKDIR /root
 
 # OpenVINO
-RUN su - user -c "git clone --depth 1 --branch 2021.3 https://github.com/openvinotoolkit/openvino.git"
+RUN git clone --depth 1 --branch 2022.2.0 https://github.com/openvinotoolkit/openvino.git
+WORKDIR /root/openvino
+RUN git submodule update --init --recursive
+RUN bash install_build_dependencies.sh
+ENV OpenCV_DIR /usr/local/lib/cmake/opencv4
+RUN pip3 install -r /root/openvino/src/bindings/python/src/compatibility/openvino/requirements-dev.txt
+RUN mkdir /root/openvino/build
+WORKDIR /root/openvino/build
+#RUN cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/pi/openvino_dist -DENABLE_MKL_DNN=OFF -DENABLE_CLDNN=OFF -DENABLE_GNA=OFF -DENABLE_SSE42=OFF -DTHREADING=SEQ -DENABLE_OPENCV=OFF -DNGRAPH_PYTHON_BUILD_ENABLE=ON -DNGRAPH_ONNX_IMPORT_ENABLE=ON -DENABLE_PYTHON=ON -DPYTHON_EXECUTABLE=/usr/bin/python3.8 -DPYTHON_LIBRARY=/usr/lib/arm-linux-gnueabihf/libpython3.8m.so -DPYTHON_INCLUDE_DIR=/usr/include/python3.8 -DCMAKE_CXX_FLAGS=-latomic ..
+RUN  cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_PYTHON=ON -DPYTHON_EXECUTABLE=/usr/bin/python3.8 -DPYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.8m.so -DPYTHON_INCLUDE_DIR=/usr/include/python3.8 -DENABLE_OV_ONNX_FRONTEND=ON ..
+RUN make -j8
+RUN make install
 
 ########## DOTFILES ##########
-RUN su - user -c "git clone https://github.com/s7117/.dotfiles.git /home/user/.dotfiles"
+RUN su - user -c  "git clone https://github.com/s7117/.dotfiles.git /home/user/.dotfiles"
+
 
 USER user
+WORKDIR /home/user
 
 # Command
 CMD [ "/bin/bash" ]
