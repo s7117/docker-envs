@@ -71,7 +71,7 @@ WORKDIR /root/openvino/build
 #RUN cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/home/pi/openvino_dist -DENABLE_MKL_DNN=OFF -DENABLE_CLDNN=OFF -DENABLE_GNA=OFF -DENABLE_SSE42=OFF -DTHREADING=SEQ -DENABLE_OPENCV=OFF -DNGRAPH_PYTHON_BUILD_ENABLE=ON -DNGRAPH_ONNX_IMPORT_ENABLE=ON -DENABLE_PYTHON=ON -DPYTHON_EXECUTABLE=/usr/bin/python3.8 -DPYTHON_LIBRARY=/usr/lib/arm-linux-gnueabihf/libpython3.8m.so -DPYTHON_INCLUDE_DIR=/usr/include/python3.8 -DCMAKE_CXX_FLAGS=-latomic ..
 RUN  cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_PYTHON=ON -DPYTHON_EXECUTABLE=/usr/bin/python3.8 -DPYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.8m.so -DPYTHON_INCLUDE_DIR=/usr/include/python3.8 -DENABLE_OV_ONNX_FRONTEND=ON ..
 RUN make -j8
-RUN make install
+#RUN make install
 
 ########## DOTFILES ##########
 RUN su - user -c  "git clone https://github.com/s7117/.dotfiles.git /home/user/.dotfiles"
