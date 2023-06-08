@@ -25,3 +25,9 @@ Before using this image please refer to the nvidia-docker documentation:
 - `docker exec <container_name> <executable>`
 
 Optionally, you can add the `--restart unless-stopped` to the `docker run` command to restart the docker container on docker startup.
+
+## Installing Other Packages:
+
+The user password is `temp2023`. It is advised to reset this password as soon as possible upon creating the container.
+
+Use `passwd` and `temp2023` to change the default password to a new password.
