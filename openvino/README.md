@@ -4,10 +4,8 @@
 
 ## Configuration/Installation
 
-1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop).
-1. Start the Docker Daemon by searching for the program and starting it. It is useful to have docker always startup on login.
-1. Run `docker pull s7117/ubuntu_env`
-1. Run `docker run --name <container_name> --hostname <hostname> -ti s7117/ubuntu_env`
+1. Run: `docker pull s7117/ubuntu_env`
+2. Run: `docker run --name <container_name> --hostname <hostname> -ti s7117/ubuntu_env`
 
 ## Enter the shell via `docker exec` or `docker start`
 

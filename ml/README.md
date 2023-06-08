@@ -21,10 +21,8 @@ If you wish to have a directory shared between the host machine and the Docker c
 
 ## First Time Configuration/Installation
 
-1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop).
-1. Start the Docker Daemon by searching for the program and starting it. It is useful to have docker always startup on login.
 1. Run `docker pull s7117/docker_ml`
-1. Run `docker run --gpus all --name <container_name> --hostname <hostname> -ti s7117/docker_ml`
+2. Run `docker run --gpus all --name <container_name> --hostname <hostname> -ti s7117/docker_ml`
 
 ## Re-Enter the shell via `docker exec` or `docker start`
 
@@ -40,7 +38,7 @@ If you wish to have a directory shared between the host machine and the Docker c
 For PyTorch do the following:
 
 1. `conda create --name pytorch pytorch cudatoolkit=11.6`
-1. `conda activate pytorch`
+2. `conda activate pytorch`
 
 ## Installing Other Packages:
 
