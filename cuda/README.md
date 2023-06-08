@@ -4,9 +4,9 @@
 
 ## CUDA Version Tags
 
-`11.7.1` = s7117/ubuntu_cuda:11.7  
-`11.8.0` = s7117/ubuntu_cuda:11.8  
-`12.1.1` = s7117/ubuntu_cuda:12.1  
+`11.7.1` = s7117/ubuntu-cuda:11.7  
+`11.8.0` = s7117/ubuntu-cuda:11.8  
+`12.1.1` = s7117/ubuntu-cuda:12.1  
 
 ## GPU Access Prerequisite: nvidia-container-toolkit
 
@@ -18,8 +18,8 @@ https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.
 
 ## Configuration/Installation
 
-1. Run: `docker pull s7117/ubuntu_cuda:<cudaversion>`
-2. Run: `docker run --gpus all --name <container_name> --hostname <hostname> -ti s7117/ubuntu_cuda:<cudaversion>`
+1. Run: `docker pull s7117/ubuntu-cuda:<cudaversion>`
+2. Run: `docker run --gpus all --name <container_name> --hostname <hostname> -ti s7117/ubuntu-cuda:<cudaversion>`
 
 ## Enter the shell via `docker exec` or `docker start`
 

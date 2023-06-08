@@ -4,8 +4,8 @@
 
 ## Configuration/Installation
 
-1. Run: `docker pull s7117/ubuntu_base`
-2. Run: `docker run --name <container_name> --hostname <hostname> -ti s7117/ubuntu_base`
+1. Run: `docker pull s7117/ubuntu-base`
+2. Run: `docker run --name <container_name> --hostname <hostname> -ti s7117/ubuntu-base`
 
 ## Enter the shell via `docker exec` or `docker start`
 
