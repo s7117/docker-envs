@@ -4,20 +4,26 @@
 
 This Docker image contains the necessary PyTorch and TensorFlow tools pre-installed in Miniforge3 conda environments. See the Dockerfile for more info.
 
-# Machine Learning
+## CUDA Version Tags
+
+`11.7.1` = s7117/ubuntu_cuda:11.7  
+`11.8.0` = s7117/ubuntu_cuda:11.8  
+`12.1.1` = s7117/ubuntu_cuda:12.1  
+
+## GPU Access Prerequisite: nvidia-container-toolkit
 
 **_You must use the `--gpus all` argument to the `docker run` command to pass gpus access to the containter._**
 
-Before using this image please refer to the nvidia-docker documentation:
+This requires installing the `nvidia-container-toolkit` prior to using the GPUs.
 
-- https://github.com/NVIDIA/nvidia-docker
-- https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker
+https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html
+
 
 ## Bind/Mount a Directory
 
 If you wish to have a directory shared between the host machine and the Docker container do the following when you run the image for the first time:
 
-`docker run --gpus all --name <container_name> --hostname <hostname> --mount type=bind,source=<localdir>,target=<containerdir> -ti s7117/docker_ml:latest`
+`docker run --gpus all --name <container_name> --hostname <hostname> --mount type=bind,source=<localdir>,target=<containerdir> -ti s7117/docker_ml:<cudaversion>`
 
 ## First Time Configuration/Installation
 
