@@ -1,6 +1,6 @@
 # Ubuntu Machine Learning Docker Development Environment
 
-**_Be sure to change the password for the user immediately after creating the container!_**
+**_WARNING: Be sure to change the password for the user immediately after creating the container!_**
 
 This Docker image contains the necessary PyTorch and TensorFlow tools pre-installed in Miniforge3 conda environments. See the Dockerfile for more info.
 

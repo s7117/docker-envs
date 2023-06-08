@@ -1,6 +1,6 @@
 # Ubuntu Docker Development Environment
 
-**_Be sure to change the password for the user immediately after creating the container!_**
+**_WARNING: Be sure to change the password for the user immediately after creating the container!_**
 
 ## Configuration/Installation
 
