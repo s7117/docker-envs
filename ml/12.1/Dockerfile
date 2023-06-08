@@ -1,4 +1,4 @@
-FROM s7117/cuda:12.1
+FROM s7117/ubuntu-cuda:12.1
 
 # ENV
 ENV DEBIAN_FRONTEND=noninteractive
