@@ -28,7 +28,7 @@ RUN locale-gen en_US.UTF-8
 # Create a new user
 RUN adduser user --shell /bin/bash --disabled-password --home /home/user --gecos ""
 RUN usermod -aG sudo user
-RUN echo 'user:temp2022' | chpasswd
+RUN echo 'user:temp2023' | chpasswd
 
 
 ########## OPENVINO ##########

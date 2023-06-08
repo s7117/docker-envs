@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.6.2-devel-ubuntu20.04
+FROM s7117/cuda:11.8
 
 # ENV
 ENV DEBIAN_FRONTEND=noninteractive
@@ -29,7 +29,7 @@ RUN locale-gen en_US.UTF-8
 # Create a new user
 RUN adduser user --shell /bin/bash --disabled-password --home /home/user --gecos ""
 RUN usermod -aG sudo user
-RUN echo 'user:temp2022' | chpasswd
+RUN echo 'user:temp2023' | chpasswd
 
 # Get the os configs
 RUN su - user -c "git clone https://github.com/s7117/.dotfiles.git /home/user/.dotfiles"
@@ -48,10 +48,10 @@ RUN su - user -c "rm ./Miniforge3*"
 RUN su - user -c "/home/user/.miniforge3/bin/conda init bash"
 
 # Install ML Tools in Conda Env
-#RUN su - user -c "/home/user/.miniforge3/bin/conda create --name pytorch \
-#                  pytorch=1.12.1 cudatoolkit=11.6 -y"
+RUN su - user -c "/home/user/.miniforge3/bin/conda create --name torchgpu \
+  pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia"
 RUN su - user -c "/home/user/.miniforge3/bin/conda create --name tfgpu \
-                  tensorflow-gpu"
+  tensorflow-gpu"
 
 USER user
 
