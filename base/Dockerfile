@@ -19,7 +19,7 @@ RUN apt-get install apt-utils \
   build-essential libssl-dev zlib1g-dev libbz2-dev \
   libreadline-dev libsqlite3-dev wget curl llvm \
   libncurses5-dev libncursesw5-dev xz-utils tk-dev \
-  libffi-dev liblzma-dev \
+  libffi-dev liblzma-dev usbutils \
   g++ make unzip zip zsh \
   dos2unix x11-apps -y
 

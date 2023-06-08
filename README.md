@@ -1,26 +1,50 @@
-# docker_env
+# My Docker Environments
+
 A simple Dockerfile for an Ubuntu 20.04 development environment. Portable for use with classes and projects. Also useful as an experimental sandbox.
 
 As of now these environments are only on Ubuntu but in theory should be able to be ported to other distros by changing the `FROM` at the beginning of the Dockerfile.
 
+## Basic Usage:
+
+While the basic use command will work, looking at the `readme.md` file in each respective directory will yield better results.
+
+```shell
+docker run -ti s7117/ubuntu_<suffix>:<tag>
+```
+
+## Detailed Usage:
+
+See the `README.md` in each respective directory for specific usage instructions and details.
+
+See [docs/common-docker.md](docs/common-docker.md) for some common docker commands and their definitions.
+
+```shell
+# base
+base/README.md
+# cuda
+cuda/README.md
+# ml
+ml/README.md
+```
+
 ## Environments
-- [docker_env](base/) - Customized Ubuntu Development Environment
-- [docker_env_cuda](cuda/) - Customized CUDA Image
-- [docker_env_ml](ml/) - Machine Learning Image with PyTorch and TensorFlow GPU installed under Miniforge3
+
+- [ubuntu_env](base/) - Customized Ubuntu Development Environment
+- [ubuntu_cuda](cuda/) - Customized CUDA Image
+- [ubuntu_ml](ml/) - Machine Learning Image with PyTorch (torchgpu) and TensorFlow GPU (tfgpu) installed under Miniforge3
 
 ## Environment Considerations:
-- zsh is preinstalled into the docker container and will start unless `/bin/bash` is passed in.
+
 - My [.dotfiles](https://github.com/s7117/.dotfiles) git repository is automattically cloned into the user's home directory.
-- [oh-my-posh](https://github.com/jandedobbeleer/oh-my-posh) is used for the terminal prompt generation.
-- To use my oh-my-posh theme you will need to install the [FiraCode Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip). Place the fonts in `~/.fonts` and then run `fc-cache -f -v`.
 
 ## Build Instructions
-### Base
-1. `docker buildx create --name ubuntu_env --use`
-1. `docker buildx build --no-cache --tag s7117/docker_env:latest --platform=linux/amd64,linux/arm64 --push .`
 
-### CUDA
-1. `docker build --no-cache --tag s7117/docker_env_cuda:latest --push .`
+See [build.sh](./build.sh) for more details.
 
-### Machine Learning
-1. `docker build --no-cache --tag s7117/docker_env_ml:latest --push .`
+To build all images includes in this repo, simply run the [build.sh](./build.sh) script:
+
+```shell
+bash build.sh
+# OR
+./build.sh
+```

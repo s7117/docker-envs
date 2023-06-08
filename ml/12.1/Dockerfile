@@ -21,7 +21,7 @@ RUN apt-get install apt-utils sudo \
   libreadline-dev libsqlite3-dev wget curl llvm \
   libncurses5-dev libncursesw5-dev xz-utils tk-dev \
   libffi-dev liblzma-dev python-openssl \
-  g++ make unzip zip dos2unix x11-apps -y
+  g++ make unzip zip dos2unix x11-apps usbutils -y
 
 # Set locale
 RUN locale-gen en_US.UTF-8
