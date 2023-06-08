@@ -6,9 +6,9 @@ This Docker image contains the necessary PyTorch and TensorFlow tools pre-instal
 
 ## CUDA Version Tags
 
-`11.7.1` = s7117/ubuntu_cuda:11.7  
-`11.8.0` = s7117/ubuntu_cuda:11.8  
-`12.1.1` = s7117/ubuntu_cuda:12.1  
+`11.7.1` = s7117/ubuntu_ml:11.7  
+`11.8.0` = s7117/ubuntu_ml:11.8  
+`12.1.1` = s7117/ubuntu_ml:12.1  
 
 ## GPU Access Prerequisite: nvidia-container-toolkit
 
