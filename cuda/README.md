@@ -1,10 +1,10 @@
 # Ubuntu CUDA Docker Development Environment
 
-**_ Be sure to change the password for the user and root immediately after creating the container! _**
+**_Be sure to change the password for the user immediately after creating the container!_**
 
 # CUDA
 
-**_ You must use the `--gpus all` argument to the `docker run` command to pass gpus access to the containter. _**
+**_You must use the `--gpus all` argument to the `docker run` command to pass gpus access to the containter._**
 
 Before using this image please refer to the nvidia-docker documentation:
 
