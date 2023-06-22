@@ -20,7 +20,7 @@ RUN apt-get install apt-utils sudo \
   libreadline-dev libsqlite3-dev wget curl llvm \
   libncurses5-dev libncursesw5-dev xz-utils tk-dev \
   libffi-dev liblzma-dev python-openssl \
-  g++ make unzip zip dos2unix x11-apps -y
+  g++ make unzip zip dos2unix x11-apps zsh usbutils -y
 
 # Set locale
 RUN locale-gen en_US.UTF-8
@@ -28,7 +28,8 @@ RUN locale-gen en_US.UTF-8
 # Create a new user
 RUN adduser user --shell /bin/bash --disabled-password --home /home/user --gecos ""
 RUN usermod -aG sudo user
-RUN echo 'user:temp2022' | chpasswd
+RUN passwd --lock root
+RUN echo 'user:temp2023' | chpasswd
 
 # Get the os configs
 RUN su - user -c "git clone https://github.com/s7117/.dotfiles.git /home/user/.dotfiles"
