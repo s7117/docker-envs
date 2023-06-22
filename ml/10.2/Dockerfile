@@ -12,7 +12,6 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Update
 RUN apt-get update -y
-RUN apt-get upgrade -y
 
 # Install Packages
 RUN apt-get install apt-utils sudo \
@@ -38,6 +37,18 @@ RUN su - user -c "git clone https://github.com/s7117/.dotfiles.git /home/user/.d
 # Clone the nvidia cuda tools
 RUN su - user -c "git clone https://github.com/NVIDIA/cuda-samples.git /home/user/cuda_samples"
 
+# Setup TensorRT 8.2.1.8
+COPY ./nv-tensorrt-repo-ubuntu1804-cuda10.2-trt8.2.1.8-ga-20211117_1-1_amd64.deb /
+RUN dpkg -i /nv-tensorrt-repo-ubuntu1804-cuda10.2-trt8.2.1.8-ga-20211117_1-1_amd64.deb
+RUN apt-key add /var/nv-tensorrt-repo-ubuntu1804-cuda10.2-trt8.2.1.8-ga-20211117/7fa2af80.pub
+RUN apt-get update
+RUN dpkg -i /var/nv-tensorrt-repo-ubuntu1804-cuda10.2-trt8.2.1.8-ga-20211117/*.deb
+RUN apt-get update
+RUN apt-mark hold graphsurgeon-tf libcudnn8 libcudnn8-dev onnx-graphsurgeon uff-converter-tf
+RUN apt-get install tensorrt=8.2.1.8-1+cuda10.2
+
+RUN apt-get upgrade -y
+
 WORKDIR /home/user
 
 # Setup Miniforge3
@@ -47,6 +58,24 @@ RUN su - user -c "chmod 700 ./Miniforge3*.sh"
 RUN su - user -c "./Miniforge3-Linux-x86_64.sh -b -p /home/user/.miniforge3 -f"
 RUN su - user -c "rm ./Miniforge3*"
 RUN su - user -c "/home/user/.miniforge3/bin/conda init bash"
+RUN su - user -c "source /home/user/.bashrc"
+# RUN su - user -c 'eval "$(~/.miniforge3/bin/conda shell.bash hook)"'
+
+# Compile PyTorch 1.10.1 from source to use more capable GPUs
+RUN su - user -c "/home/user/.miniforge3/bin/conda create --name buildtorch python=3.6.9 astunparse numpy ninja pyyaml mkl mkl-include setuptools cmake cffi typing_extensions future six requests dataclasses -y"
+RUN su - user -c "/home/user/.miniforge3/bin/conda install -n buildtorch -c pytorch magma-cuda102 -y"
+RUN su - user -c "/home/user/.miniforge3/bin/conda run -n buildtorch /bin/bash -c python3 --version"
+# Get the source code
+RUN su - user -c "mkdir -p pytorch"
+RUN su - user -c "git clone --recursive https://github.com/pytorch/pytorch /home/user/pytorch"
+WORKDIR /home/user/pytorch
+RUN su - user -c "cd /home/user/pytorch && git fetch --all --tags --prune"
+RUN su - user -c "cd /home/user/pytorch && git checkout tags/v1.10.1"
+RUN su - user -c "cd /home/user/pytorch && git submodule sync"
+RUN su - user -c "cd /home/user/pytorch && git submodule update --init --recursive --jobs 0"
+ENV TORCH_CUDA_ARCH_LIST="7.5"
+ENV CMAKE_PREFIX_PATH=${CONDA_PREFIX:-"$(dirname $(which conda))/../"}
+RUN su - user -c "/home/user/.miniforge3/bin/conda run -n buildtorch /bin/bash -c 'cd /home/user/pytorch && python setup.py install'"
 
 # Install ML Tools in Conda Env
 #RUN su - user -c "/home/user/.miniforge3/bin/conda create --name torchgpu \
@@ -54,6 +83,7 @@ RUN su - user -c "/home/user/.miniforge3/bin/conda init bash"
 #RUN su - user -c "/home/user/.miniforge3/bin/conda create --name tfgpu \
 #  tensorflow-gpu"
 
+WORKDIR /home/user
 USER user
 
 # Command
