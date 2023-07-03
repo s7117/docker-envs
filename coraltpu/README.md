@@ -5,7 +5,25 @@
 ## Configuration/Installation
 
 1. Run: `docker pull s7117/ubuntu-base`
-2. Run: `docker run --name <container_name> --hostname <hostname> -ti s7117/ubuntu-base`
+2. Run: `docker run --privileged -v /dev/bus/usb:/dev/bus/usb --name <container_name> --hostname <hostname> -ti s7117/ubuntu-coraltpu`
+
+## Passing Through GUI:
+```shell
+# Add the --env="DISPLAY" --net=host flags to the docker run command
+docker run --env="DISPLAY" --net=host --privileged -v /dev/bus/usb:/dev/bus/usb --name <container_name> --hostname <hostname> -ti s7117/ubuntu-coraltpu
+```
+## Running Example:
+
+```shell
+mkdir coral && cd coral
+git clone https://github.com/google-coral/pycoral.git
+cd pycoral
+bash examples/install_requirements.sh classify_image.py
+sudo python3 examples/classify_image.py \
+--model test_data/mobilenet_v2_1.0_224_inat_bird_quant_edgetpu.tflite \
+--labels test_data/inat_bird_labels.txt \
+--input test_data/parrot.jpg
+```
 
 ## Enter the shell via `docker exec` or `docker start`
 
