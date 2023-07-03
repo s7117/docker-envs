@@ -17,6 +17,13 @@ build-base:
 					--tag s7117/ubuntu-base:latest
 	echo "### LOG --> Base image built..."
 
+build-coral:
+	echo "### LOG --> BUILDING CORALTPU IMAGE..."
+	docker buildx build -f ./coraltpu/Dockerfile --no-cache \
+					--platform=linux/amd64,linux/arm64 --push coraltpu \
+					--tag s7117/ubuntu-coraltpu:latest
+	echo "### LOG --> CoralTPU image built..."
+
 build-cuda:
 	# CUDA
 	echo "### LOG --> BUILDING CUDA IMAGES..."
