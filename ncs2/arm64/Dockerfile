@@ -22,10 +22,13 @@ RUN apt-get install apt-utils \
   libffi-dev liblzma-dev usbutils \
   g++ make unzip zip zsh \
   dos2unix x11-apps cmake python3.9 python3.9-pip libpython3.9 \
-  python3.9-venv libopencv-dev python3-opencv -y
+  python3.9-venv libopencv-dev python3-opencv udev -y
 
 # Set locale
 RUN locale-gen en_US.UTF-8
+
+# Enable udev
+RUN systemctl enable udev
 
 # Create a new user
 RUN adduser user --shell /bin/bash --disabled-password --home /home/user --gecos ""
