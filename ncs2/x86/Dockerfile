@@ -1,5 +1,8 @@
 FROM openvino/ubuntu20_dev:2022.3.1
 
+# Change to root user
+USER root
+
 # ENV
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DISPLAY=host.docker.internal:0.0
