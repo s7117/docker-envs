@@ -21,7 +21,8 @@ RUN apt-get install apt-utils \
   libncurses5-dev libncursesw5-dev xz-utils tk-dev \
   libffi-dev liblzma-dev usbutils \
   g++ make unzip zip zsh \
-  dos2unix x11-apps cmake python3.9 libpython3.9 -y
+  dos2unix x11-apps cmake python3.9 python3.9-pip libpython3.9 \
+  python3.9-venv libopencv-dev python3-opencv -y
 
 # Set locale
 RUN locale-gen en_US.UTF-8
@@ -49,8 +50,7 @@ RUN python3.9 -m pip install -r python/python3.9/requirements.txt
 WORKDIR /opt/intel
 RUN ln -s openvino_2022.3.1 openvino_2022
 
-# TODO: Install Open Model Zoo
-
+# Modify .bashrc for user
 RUN su - user -c "echo 'source /opt/intel/openvino_2022/setupvars.sh -pyver 3.9' >> /home/user/.bashrc"
 
 USER user

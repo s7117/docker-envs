@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM openvino/ubuntu20_dev:2022.3.1
 
 # ENV
 ENV DEBIAN_FRONTEND=noninteractive
@@ -21,7 +21,7 @@ RUN apt-get install apt-utils \
   libncurses5-dev libncursesw5-dev xz-utils tk-dev \
   libffi-dev liblzma-dev usbutils \
   g++ make unzip zip zsh \
-  dos2unix x11-apps cmake python3.9 libpython3.9 -y
+  dos2unix x11-apps cmake -y
 
 # Set locale
 RUN locale-gen en_US.UTF-8
@@ -35,23 +35,9 @@ RUN echo 'user:temp2023' | chpasswd
 # Get the os configs
 RUN su - user -c "git clone https://github.com/s7117/.dotfiles.git /home/user/.dotfiles"
 
-# OPENVINO SETUP
-RUN mkdir -p /opt/intel
-COPY l_openvino_toolkit_ubuntu20_2022.3.1_x86_64.tgz /opt/intel
-COPY l_openvino_toolkit_ubuntu20_2022.3.1_x86_64.tgz.sha256 /opt/intel
-WORKDIR /opt/intel
-RUN cat l_openvino_toolkit_ubuntu20_2022.3.1_x86_64.tgz.sha256 | shasum -a 256 --check
-RUN tar -xf l_openvino_toolkit_ubuntu20_2022.3.1_x86_64.tgz
-RUN mv l_openvino_toolkit_ubuntu20_2022.3.1.9227.cf2c7da5689_x86_64 openvino_2022.3.1
-WORKDIR /opt/intel/openvino_2022.3.1
-RUN install_dependencies/install_openvino_dependencies.sh
-RUN python3.9 -m pip install -r python/python3.9/requirements.txt
-WORKDIR /opt/intel
-RUN ln -s openvino_2022.3.1 openvino_2022
-
-# TODO: Install Open Model Zoo
-
-RUN su - user -c "echo 'source /opt/intel/openvino_2022/setupvars.sh -pyver 3.9' >> /home/user/.bashrc"
+# Remove default openvino user
+RUN userdel openvino
+RUN rm -rf /home/openvino
 
 USER user
 WORKDIR /home/user
