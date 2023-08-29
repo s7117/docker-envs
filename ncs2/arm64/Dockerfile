@@ -27,9 +27,6 @@ RUN apt-get install apt-utils \
 # Set locale
 RUN locale-gen en_US.UTF-8
 
-# Enable udev
-RUN systemctl enable udev
-
 # Create a new user
 RUN adduser user --shell /bin/bash --disabled-password --home /home/user --gecos ""
 RUN usermod -aG sudo user
@@ -52,6 +49,31 @@ RUN install_dependencies/install_openvino_dependencies.sh
 RUN python3.9 -m pip install -r python/python3.9/requirements.txt
 WORKDIR /opt/intel
 RUN ln -s openvino_2022.3.1 openvino_2022
+RUN ln -s openvino_2022.3.1 openvino
+
+# LIB USB
+WORKDIR /tmp
+RUN curl -L https://github.com/libusb/libusb/archive/v1.0.22.zip --output v1.0.22.zip; \
+  unzip v1.0.22.zip; \
+  rm -rf v1.0.22.zip
+
+WORKDIR /tmp/libusb-1.0.22
+RUN ./bootstrap.sh; \
+  ./configure --disable-udev --enable-shared; \
+  make "-j$(nproc)"
+
+RUN mv /tmp/libusb-1.0.22 /opt/libusb-1.0.22
+
+WORKDIR /opt/libusb-1.0.22
+RUN ./libtool --mode=install install -c libusb/libusb-1.0.la /usr/local/lib/; \
+  mkdir -p /usr/local/include/libusb-1.0; \
+  install -c -m 644 libusb/libusb.h /usr/local/include/libusb-1.0; \
+  mkdir -p /usr/local/lib/pkgconfig; \
+  install -c -m 644 libusb-1.0.pc /usr/local/lib/pkgconfig
+
+WORKDIR /opt/intel/openvino_2022
+RUN chmod +x install_dependencies/install_NCS_udev_rules.sh; \
+  ./install_dependencies/install_NCS_udev_rules.sh
 
 # Modify .bashrc for user
 RUN su - user -c "echo 'source /opt/intel/openvino_2022/setupvars.sh -pyver 3.9' >> /home/user/.bashrc"
