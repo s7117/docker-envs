@@ -24,7 +24,7 @@ RUN apt-get install apt-utils \
   libncurses5-dev libncursesw5-dev xz-utils tk-dev \
   libffi-dev liblzma-dev usbutils \
   g++ make unzip zip zsh \
-  dos2unix x11-apps cmake udev -y
+  dos2unix x11-apps cmake -y
 
 # Set locale
 RUN locale-gen en_US.UTF-8

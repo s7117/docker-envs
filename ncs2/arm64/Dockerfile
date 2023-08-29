@@ -21,8 +21,7 @@ RUN apt-get install apt-utils \
   libncurses5-dev libncursesw5-dev xz-utils tk-dev \
   libffi-dev liblzma-dev usbutils \
   g++ make unzip zip zsh \
-  dos2unix x11-apps cmake python3.9 python3.9-pip libpython3.9 \
-  python3.9-venv libopencv-dev python3-opencv udev -y
+  dos2unix x11-apps cmake python3.9 libpython3.9 -y
 
 # Set locale
 RUN locale-gen en_US.UTF-8
