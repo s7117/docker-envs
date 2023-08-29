@@ -21,7 +21,8 @@ RUN apt-get install apt-utils \
   libncurses5-dev libncursesw5-dev xz-utils tk-dev \
   libffi-dev liblzma-dev usbutils \
   g++ make unzip zip zsh \
-  dos2unix x11-apps cmake python3.9 libpython3.9 -y
+  dos2unix x11-apps cmake python3.9 libpython3.9 \
+  udev autoconf libtool -y
 
 # Set locale
 RUN locale-gen en_US.UTF-8
@@ -44,7 +45,6 @@ RUN cat l_openvino_toolkit_debian9_2022.3.1_arm64.tgz.sha256 | shasum -a 256 --c
 RUN tar -xf l_openvino_toolkit_debian9_2022.3.1_arm64.tgz
 RUN mv l_openvino_toolkit_debian9_2022.3.1.9227.cf2c7da5689_arm64 openvino_2022.3.1
 WORKDIR /opt/intel/openvino_2022.3.1
-RUN install_dependencies/install_openvino_dependencies.sh
 RUN python3.9 -m pip install -r python/python3.9/requirements.txt
 WORKDIR /opt/intel
 RUN ln -s openvino_2022.3.1 openvino_2022
@@ -63,6 +63,14 @@ RUN ./bootstrap.sh; \
 
 RUN mv /tmp/libusb-1.0.22 /opt/libusb-1.0.22
 
+WORKDIR /opt/intel/openvino
+
+RUN chmod +x install_dependencies/install_openvino_dependencies.sh; \
+  ./install_dependencies/install_openvino_dependencies.sh -y -c=python -c=dev
+
+RUN chmod +x install_dependencies/install_NEO_OCL_driver.sh; \
+  ./install_dependencies/install_NEO_OCL_driver.sh -y --no_numa
+
 WORKDIR /opt/libusb-1.0.22
 RUN ./libtool --mode=install install -c libusb/libusb-1.0.la /usr/local/lib/; \
   mkdir -p /usr/local/include/libusb-1.0; \
@@ -70,9 +78,12 @@ RUN ./libtool --mode=install install -c libusb/libusb-1.0.la /usr/local/lib/; \
   mkdir -p /usr/local/lib/pkgconfig; \
   install -c -m 644 libusb-1.0.pc /usr/local/lib/pkgconfig
 
-WORKDIR /opt/intel/openvino_2022
+WORKDIR /opt/intel/openvino
 RUN chmod +x install_dependencies/install_NCS_udev_rules.sh; \
   ./install_dependencies/install_NCS_udev_rules.sh
+
+RUN python3.9 -m pip install --no-cache-dir --upgrade pip; \
+  python3.9 -m pip install --no-cache-dir -r python/python3.9/requirements.txt;
 
 # Modify .bashrc for user
 RUN su - user -c "echo 'source /opt/intel/openvino_2022/setupvars.sh -pyver 3.9' >> /home/user/.bashrc"
