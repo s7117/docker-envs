@@ -68,9 +68,6 @@ WORKDIR /opt/intel/openvino
 RUN chmod +x install_dependencies/install_openvino_dependencies.sh; \
   ./install_dependencies/install_openvino_dependencies.sh -y -c=python -c=dev
 
-RUN chmod +x install_dependencies/install_NEO_OCL_driver.sh; \
-  ./install_dependencies/install_NEO_OCL_driver.sh -y --no_numa
-
 WORKDIR /opt/libusb-1.0.22
 RUN ./libtool --mode=install install -c libusb/libusb-1.0.la /usr/local/lib/; \
   mkdir -p /usr/local/include/libusb-1.0; \
