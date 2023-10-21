@@ -39,9 +39,6 @@ RUN usermod -aG sudo user
 RUN passwd --lock root
 RUN echo 'user:temp2023' | chpasswd
 
-# Get the os configs
-RUN su - user -c "git clone https://github.com/s7117/.dotfiles.git /home/user/.dotfiles"
-
 USER user
 WORKDIR /home/user
 

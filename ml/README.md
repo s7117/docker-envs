@@ -6,10 +6,9 @@ This Docker image contains the necessary PyTorch and TensorFlow tools pre-instal
 
 ## CUDA Version Tags
 
-`10.2` = s7117/ubuntu-ml:10.2
 `11.7.1` = s7117/ubuntu-ml:11.7  
 `11.8.0` = s7117/ubuntu-ml:11.8  
-`12.1.1` = s7117/ubuntu-ml:12.1
+`12.2.2` = s7117/ubuntu-ml:12.2
 
 ## GPU Access Prerequisite: nvidia-container-toolkit
 
@@ -27,8 +26,8 @@ If you wish to have a directory shared between the host machine and the Docker c
 
 ## First Time Configuration/Installation
 
-1. Run `docker pull s7117/docker-ml`
-2. Run `docker run --gpus all --name <container_name> --hostname <hostname> -ti s7117/docker-ml`
+1. Run `docker pull s7117/docker-ml:<cudaversion>`
+2. Run `docker run --gpus all --name <container_name> --hostname <hostname> -ti s7117/docker-ml:<cudaversion>`
 
 ## Re-Enter the shell via `docker exec` or `docker start`
 

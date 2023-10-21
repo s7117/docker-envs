@@ -32,9 +32,6 @@ RUN usermod -aG sudo user
 RUN passwd --lock root
 RUN echo 'user:temp2023' | chpasswd
 
-# Get the os configs
-RUN su - user -c "git clone https://github.com/s7117/.dotfiles.git /home/user/.dotfiles"
-
 # Clone the nvidia cuda tools
 RUN su - user -c "git clone https://github.com/NVIDIA/cuda-samples.git /home/user/cuda_samples"
 
@@ -50,7 +47,8 @@ RUN su - user -c "/home/user/.miniforge3/bin/conda init bash"
 
 # Install ML Tools in Conda Env
 RUN su - user -c "/home/user/.miniforge3/bin/conda create --name torchgpu \
-  pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia"
+  pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia"
+
 RUN su - user -c "/home/user/.miniforge3/bin/conda create --name tfgpu \
   tensorflow-gpu"
 

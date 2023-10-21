@@ -7,12 +7,16 @@
 1. Run: `docker pull s7117/ubuntu-base`
 2. Run: `docker run --privileged -v /dev/bus/usb:/dev/bus/usb --name <container_name> --hostname <hostname> -ti s7117/ubuntu-coraltpu`
 
+**_NOTE: Using the `privileged` option may incur certain security implications._**
+
 ## Passing Through GUI:
+
 ```shell
 # Add the --env="DISPLAY" --net=host flags to the docker run command
 docker run --env="DISPLAY" --net=host --privileged -v /dev/bus/usb:/dev/bus/usb --name <container_name> --hostname <hostname> -ti s7117/ubuntu-coraltpu
 ```
-## Running Example:
+
+## Running an Example:
 
 ```shell
 mkdir coral && cd coral
