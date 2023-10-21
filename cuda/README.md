@@ -6,7 +6,7 @@
 
 `11.7.1` = s7117/ubuntu-cuda:11.7  
 `11.8.0` = s7117/ubuntu-cuda:11.8  
-`12.1.1` = s7117/ubuntu-cuda:12.1  
+`12.2.2` = s7117/ubuntu-cuda:12.2
 
 ## GPU Access Prerequisite: nvidia-container-toolkit
 

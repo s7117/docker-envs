@@ -9,7 +9,7 @@ As of now these environments are only on Ubuntu but in theory should be able to 
 While the basic use command will work, looking at the `readme.md` file in each respective directory will yield better results.
 
 ```shell
-docker run -ti s7117/ubuntu_<suffix>:<tag>
+docker run -ti s7117/ubuntu-<suffix>:<tag>
 ```
 
 ## Detailed Usage:
@@ -17,15 +17,6 @@ docker run -ti s7117/ubuntu_<suffix>:<tag>
 See the `README.md` in each respective directory for specific usage instructions and details.
 
 See [docs/common-docker.md](docs/common-docker.md) for some common docker commands and their definitions.
-
-```shell
-# base
-base/README.md
-# cuda
-cuda/README.md
-# ml
-ml/README.md
-```
 
 ## Environments
 
@@ -35,9 +26,9 @@ ml/README.md
 
 ## Environment Considerations:
 
-- My [.dotfiles](https://github.com/s7117/.dotfiles) git repository is automattically cloned into the user's home directory.
+- I recommend taking a look at my [.dotfiles](https://github.com/s7117/.dotfiles) GitHub repository!
 
-## Build Instructions
+<!-- ## Build Instructions
 
 See [build.sh](./build.sh) for more details.
 
@@ -47,4 +38,4 @@ To build all images includes in this repo, simply run the [build.sh](./build.sh)
 bash build.sh
 # OR
 ./build.sh
-```
+``` -->
