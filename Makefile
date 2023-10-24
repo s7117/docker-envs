@@ -61,6 +61,9 @@ build-ml:
 	docker push s7117/ubuntu-ml:11.8
 	docker push s7117/ubuntu-ml:12.2
 
+build-gpu-images:
+	./scripts/build-gpus.sh
+
 build-mc:
 	# Minecraft
 	echo "LOG --> NOT IMPLEMENTED..."
