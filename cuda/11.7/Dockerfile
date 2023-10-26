@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.7.1-devel-ubuntu20.04
+FROM nvidia/cuda:11.7.1-cudnn8-devel-ubuntu22.04
 
 # ENV
 ENV DEBIAN_FRONTEND=noninteractive
@@ -19,7 +19,7 @@ RUN apt-get install apt-utils sudo \
   build-essential libssl-dev zlib1g-dev libbz2-dev \
   libreadline-dev libsqlite3-dev wget curl llvm \
   libncurses5-dev libncursesw5-dev xz-utils tk-dev \
-  libffi-dev liblzma-dev python-openssl \
+  libffi-dev liblzma-dev python3-openssl \
   g++ make unzip zip dos2unix x11-apps zsh usbutils -y
 
 # Set locale
