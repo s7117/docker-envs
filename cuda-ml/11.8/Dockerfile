@@ -45,13 +45,14 @@ RUN su - user -c "/home/user/.miniforge3/bin/conda init bash"
 RUN su - user -c "/home/user/.miniforge3/bin/mamba init bash"
 
 # Install ML Tools in Conda Env
-RUN su - user -c "/home/user/.miniforge3/bin/mamba create --name torchgpu python=3.11"
+RUN su - user -c "/home/user/.miniforge3/bin/mamba create --name torchgpu python=3.11 -y"
 RUN su - user -c "/home/user/.miniforge3/envs/torchgpu/bin/python3 -m \
   pip install torch torchvision torchaudio \
   --index-url https://download.pytorch.org/whl/cu118"
 
-RUN su - user -c "/home/user/.miniforge3/bin/mamba create --name tfgpu \
-  tensorflow-gpu"
+RUN su - user -c "/home/user/.miniforge3/bin/mamba create --name tfgpu python=3.11 -y"
+RUN su - user -c "/home/user/.miniforge3/envs/tfgpu/bin/python3 -m \
+  pip install tensorflow"
 
 USER user
 
