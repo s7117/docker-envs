@@ -31,8 +31,10 @@ If you wish to have a directory shared between the host machine and the Docker c
 
 ## Conda Environments:
 
-- `conda activate tfgpu` - TensorFlow GPU
-- `conda activate torchgpu` - Pytorch GPU
+- `conda activate tfenv` - TensorFlow
+- `conda activate torchenv` - PyTorch
+
+**_NOTE: You may need to install the GPU version of TensorFlow/PyTorch for GPU support._**
 
 ## Installing Other Packages:
 

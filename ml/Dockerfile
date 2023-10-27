@@ -39,14 +39,15 @@ RUN su - user -c "chmod 700 ./Miniforge3*.sh"
 RUN su - user -c "./Miniforge3-Linux-x86_64.sh -b -p /home/user/.miniforge3 -f"
 RUN su - user -c "rm ./Miniforge3*"
 RUN su - user -c "/home/user/.miniforge3/bin/conda init bash"
+RUN su - user -c "/home/user/.miniforge3/bin/mamba init bash"
 
 # Install ML Tools in Conda Env
-RUN su - user -c "/home/user/.miniforge3/bin/conda create --name torchgpu python=3.11"
-RUN su - user -c "/home/user/.miniforge3/envs/torchgpu/bin/python3 -m \
+RUN su - user -c "/home/user/.miniforge3/bin/mamba create --name torchenv python=3.11"
+RUN su - user -c "/home/user/.miniforge3/envs/torchenv/bin/python3 -m \
   pip install torch torchvision torchaudio"
 
-RUN su - user -c "/home/user/.miniforge3/bin/conda create --name tfgpu \
-  tensorflow-gpu"
+RUN su - user -c "/home/user/.miniforge3/bin/mamba create --name tfenv \
+  tensorflow"
 
 USER user
 
