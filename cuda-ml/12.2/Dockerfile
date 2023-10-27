@@ -15,13 +15,11 @@ RUN apt-get update -y
 RUN apt-get upgrade -y
 
 # Install Packages
-RUN apt-get install apt-utils sudo \
-  vim git wget curl locales ssh htop \
-  build-essential libssl-dev zlib1g-dev libbz2-dev \
-  libreadline-dev libsqlite3-dev wget curl llvm \
-  libncurses5-dev libncursesw5-dev xz-utils tk-dev \
-  libffi-dev liblzma-dev python3-openssl \
-  g++ make unzip zip dos2unix x11-apps usbutils -y
+RUN apt-get install apt-utils \
+  sudo vim git wget curl locales ssh htop \
+  build-essential usbutils \
+  g++ make unzip zip zsh \
+  dos2unix x11-apps -y
 
 # Set locale
 RUN locale-gen en_US.UTF-8
@@ -44,12 +42,15 @@ RUN su - user -c "chmod 700 ./Miniforge3*.sh"
 RUN su - user -c "./Miniforge3-Linux-x86_64.sh -b -p /home/user/.miniforge3 -f"
 RUN su - user -c "rm ./Miniforge3*"
 RUN su - user -c "/home/user/.miniforge3/bin/conda init bash"
+RUN su - user -c "/home/user/.miniforge3/bin/mamba init bash"
 
 # Install ML Tools in Conda Env
-RUN su - user -c "/home/user/.miniforge3/bin/conda create --name torchgpu \
-  pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia"
+RUN su - user -c "/home/user/.miniforge3/bin/mamba create --name torchgpu python=3.11"
+RUN su - user -c "/home/user/.miniforge3/envs/torchgpu/bin/python3 -m \
+  pip install torch torchvision torchaudio \
+  --index-url https://download.pytorch.org/whl/cu121"
 
-RUN su - user -c "/home/user/.miniforge3/bin/conda create --name tfgpu \
+RUN su - user -c "/home/user/.miniforge3/bin/mamba create --name tfgpu \
   tensorflow-gpu"
 
 USER user

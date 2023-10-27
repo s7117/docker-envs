@@ -16,10 +16,7 @@ RUN apt-get upgrade -y
 # Install Packages
 RUN apt-get install apt-utils \
   sudo vim git wget curl locales ssh htop \
-  build-essential libssl-dev zlib1g-dev libbz2-dev \
-  libreadline-dev libsqlite3-dev wget curl llvm \
-  libncurses5-dev libncursesw5-dev xz-utils tk-dev \
-  libffi-dev liblzma-dev usbutils \
+  build-essential usbutils \
   g++ make unzip zip zsh \
   dos2unix x11-apps -y
 
@@ -32,8 +29,9 @@ RUN usermod -aG sudo user
 RUN passwd --lock root
 RUN echo 'user:temp2023' | chpasswd
 
-USER user
 WORKDIR /home/user
+
+USER user
 
 # Command
 CMD [ "/bin/bash" ]
