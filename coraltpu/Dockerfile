@@ -16,10 +16,7 @@ RUN apt-get upgrade -y
 # Install Packages
 RUN apt-get install apt-utils \
   sudo vim git wget curl locales ssh htop \
-  build-essential libssl-dev zlib1g-dev libbz2-dev \
-  libreadline-dev libsqlite3-dev wget curl llvm \
-  libncurses5-dev libncursesw5-dev xz-utils tk-dev \
-  libffi-dev liblzma-dev usbutils \
+  build-essential usbutils \
   g++ make unzip zip zsh \
   dos2unix x11-apps -y
 
@@ -28,7 +25,6 @@ RUN echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" |
 RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 RUN apt-get update
 RUN apt-get install libedgetpu1-std python3-pycoral -y
- 
 
 # Set locale
 RUN locale-gen en_US.UTF-8

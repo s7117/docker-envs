@@ -1,8 +1,14 @@
-# Ubuntu Machine Learning Docker Development Environment
+# Ubuntu Machine Learning w/ CUDA Docker Development Environment
 
 **_WARNING: Be sure to change the password for the user immediately after creating the container!_**
 
 This Docker image contains the necessary PyTorch and TensorFlow tools pre-installed in Miniforge3 conda environments. See the Dockerfile for more info.
+
+## CUDA Version Tags
+
+`11.7.1` = s7117/ubuntu-ml:11.7  
+`11.8.0` = s7117/ubuntu-ml:11.8  
+`12.2.2` = s7117/ubuntu-ml:12.2
 
 ## GPU Access Prerequisite: nvidia-container-toolkit
 
@@ -16,12 +22,12 @@ https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.
 
 If you wish to have a directory shared between the host machine and the Docker container do the following when you run the image for the first time:
 
-`docker run --gpus all --name <container_name> --hostname <hostname> --mount type=bind,source=<localdir>,target=<containerdir> -ti s7117/docker-ml:latest`
+`docker run --gpus all --name <container_name> --hostname <hostname> --mount type=bind,source=<localdir>,target=<containerdir> -ti s7117/docker-ml:<cudaversion>`
 
 ## First Time Configuration/Installation
 
-1. Run `docker pull s7117/docker-ml:latest`
-2. Run `docker run --gpus all --name <container_name> --hostname <hostname> -ti s7117/docker-ml:latest`
+1. Run `docker pull s7117/docker-ml:<cudaversion>`
+2. Run `docker run --gpus all --name <container_name> --hostname <hostname> -ti s7117/docker-ml:<cudaversion>`
 
 ## Re-Enter the shell via `docker exec` or `docker start`
 
@@ -33,6 +39,11 @@ If you wish to have a directory shared between the host machine and the Docker c
 
 - `conda activate tfgpu` - TensorFlow GPU
 - `conda activate torchgpu` - Pytorch GPU
+
+For PyTorch do the following:
+
+1. `conda create --name pytorch pytorch cudatoolkit=11.6`
+2. `conda activate pytorch`
 
 ## Installing Other Packages:
 

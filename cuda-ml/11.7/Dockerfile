@@ -4,6 +4,7 @@ FROM nvidia/cuda:11.7.1-cudnn8-devel-ubuntu22.04
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DISPLAY=host.docker.internal:0.0
 ENV TERM=xterm-256color
+ENV MF3_PATH="/home/user/.miniforge3"
 
 # Set Timezone
 ENV TZ=America/New_York
@@ -32,8 +33,26 @@ RUN echo 'user:temp2023' | chpasswd
 # Clone the nvidia cuda tools
 RUN su - user -c "git clone https://github.com/NVIDIA/cuda-samples.git /home/user/cuda_samples"
 
-USER user
 WORKDIR /home/user
+
+# Setup Miniforge3
+RUN su - user -c "mkdir /home/user/.miniforge3"
+RUN su - user -c 'wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh"'
+RUN su - user -c "chmod 700 ./Miniforge3*.sh"
+RUN su - user -c "./Miniforge3-Linux-x86_64.sh -b -p /home/user/.miniforge3 -f"
+RUN su - user -c "rm ./Miniforge3*"
+RUN su - user -c "/home/user/.miniforge3/bin/conda init bash"
+
+# Install ML Tools in Conda Env
+RUN su - user -c "/home/user/.miniforge3/bin/conda create --name torchgpu python=3.11"
+RUN su - user -c "/home/user/.miniforge3/envs/torchgpu/bin/python3 -m \
+  pip install torch torchvision torchaudio \
+  --index-url https://download.pytorch.org/whl/cu117"
+
+RUN su - user -c "/home/user/.miniforge3/bin/conda create --name tfgpu python=3.11 \
+  tensorflow-gpu"
+
+USER user
 
 # Command
 CMD [ "/bin/bash" ]

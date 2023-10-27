@@ -14,13 +14,11 @@ RUN apt-get update -y
 RUN apt-get upgrade -y
 
 # Install Packages
-RUN apt-get install apt-utils sudo \
-  vim git wget curl locales ssh htop \
-  build-essential libssl-dev zlib1g-dev libbz2-dev \
-  libreadline-dev libsqlite3-dev wget curl llvm \
-  libncurses5-dev libncursesw5-dev xz-utils tk-dev \
-  libffi-dev liblzma-dev python3-openssl \
-  g++ make unzip zip dos2unix x11-apps zsh usbutils -y
+RUN apt-get install apt-utils \
+  sudo vim git wget curl locales ssh htop \
+  build-essential usbutils \
+  g++ make unzip zip zsh \
+  dos2unix x11-apps -y
 
 # Set locale
 RUN locale-gen en_US.UTF-8
