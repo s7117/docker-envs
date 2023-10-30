@@ -1,15 +1,45 @@
 # My Docker Environments
 
-A simple Dockerfile for an Ubuntu 22.04 development environment. Portable for use with classes and projects. Also useful as an experimental sandbox.
+A simple Dockerfile for an Ubuntu 22.04 development environment. Portable for use with classes, projects, development, research, and more. It is also useful as an experimental sandbox and packaging your work for reproducible work for dissemination.
 
-As of now these environments are only on Ubuntu but in theory should be able to be ported to other distros by changing the `FROM` at the beginning of the Dockerfile.
+As of now these environments are only on Ubuntu but in theory should be able to be ported to other distros by changing the `FROM` at the beginning of the Dockerfile. Keep in mind you may need to change the package manager and other distro-specific commands in the Dockerfile.
 
 ## Basic Usage:
 
-While the basic use command will work, looking at the `readme.md` file in each respective directory will yield better results.
+While the basic use command will work, looking at the `readme.md` file in each respective directory will yield better results and more granular functionality.
 
 ```shell
-docker run -ti s7117/ubuntu-<suffix>:<tag>
+docker run --name <container-name> -ti s7117/ubuntu-<suffix>:<tag>
+```
+
+## Continued Usage:
+
+**_WARNING: Do NOT use the `docker start` command to launch additional shells. See [Launching a second shell](#launching-a-second-shell) for this information._**
+
+### Starting a stopped container:
+
+To continue to use a container that was created by using the `docker run` command above use the following **once**:
+
+```shell
+docker start -ai <container-name>
+```
+
+**_NOTE: If you did not name your container use `docker container ls -a` to determine the Docker randomly assigned name/id._**
+
+### Launching a second shell:
+
+Use the following command on a running Docker container to launch a new shell in the container (you can replace `/bin/bash` with another command if you would like to run another shell/command):
+
+```
+docker exec -ti <container-name> /bin/bash
+```
+
+### Stopping a container:
+
+Use the following command to stop/terminate a running container:
+
+```shell
+docker stop <container-name>
 ```
 
 ## Detailed Usage:
@@ -20,22 +50,19 @@ See [docs/common-docker.md](docs/common-docker.md) for some common docker comman
 
 ## Environments
 
-- [ubuntu_env](base/) - Customized Ubuntu Development Environment
-- [ubuntu_cuda](cuda/) - Customized CUDA Image
-- [ubuntu_ml](ml/) - Machine Learning Image with PyTorch (torchgpu) and TensorFlow GPU (tfgpu) installed under Miniforge3
+- [ubuntu-base](base/) - Customized Ubuntu Development Environment
+- [ubuntu-cuda](cuda/) - Customized CUDA Image
+- [ubuntu-cuda-ml](cuda-ml/) - Machine Learning Image with PyTorch (torchgpu) and TensorFlow GPU (tfgpu) installed under Miniforge3
+- [ubuntu-ml](ml/) - Machine Learning Image with PyTorch (torchgpu) and TensorFlow CPU (tfgpu) installed under Miniforge3
 
-## Environment Considerations:
+### Docker Aliases
 
-- I recommend taking a look at my [.dotfiles](https://github.com/s7117/.dotfiles) GitHub repository!
+If you want some easy and quick shortcuts for using Docker consider taking a look at my [.dotfiles](https://github.com/s7117/.dotfiles) GitHub repository!
 
-<!-- ## Build Instructions
+Some simple examples:
 
-See [build.sh](./build.sh) for more details.
-
-To build all images includes in this repo, simply run the [build.sh](./build.sh) script:
-
-```shell
-bash build.sh
-# OR
-./build.sh
-``` -->
+- `dils`: list all Docker images
+- `dcls`: list all Docker containers
+- `drmi`: delete a Docker image
+- `drmc`: delete a Docker container
+- `dclean`: delete all Docker containers and images and prune caches.
