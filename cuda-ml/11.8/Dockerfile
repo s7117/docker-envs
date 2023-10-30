@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
+FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
 
 # ENV
 ENV DEBIAN_FRONTEND=noninteractive
@@ -18,8 +18,7 @@ RUN apt-get upgrade -y
 RUN apt-get install apt-utils \
   sudo vim git wget curl locales ssh htop \
   build-essential usbutils \
-  g++ make unzip zip zsh \
-  dos2unix x11-apps -y
+  g++ make unzip zip zsh -y
 
 # Set locale
 RUN locale-gen en_US.UTF-8
@@ -29,9 +28,6 @@ RUN adduser user --shell /bin/bash --disabled-password --home /home/user --gecos
 RUN usermod -aG sudo user
 RUN passwd --lock root
 RUN echo 'user:temp2023' | chpasswd
-
-# Clone the nvidia cuda tools
-RUN su - user -c "git clone https://github.com/NVIDIA/cuda-samples.git /home/user/cuda_samples"
 
 WORKDIR /home/user
 
