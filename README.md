@@ -55,7 +55,26 @@ See [docs/common-docker.md](docs/common-docker.md) for some common docker comman
 - [ubuntu-cuda-ml](cuda-ml/) - Machine Learning Image with PyTorch (torchgpu) and TensorFlow GPU (tfgpu) installed under Miniforge3
 - [ubuntu-ml](ml/) - Machine Learning Image with PyTorch (torchgpu) and TensorFlow CPU (tfgpu) installed under Miniforge3
 
-### Docker Aliases
+## Confirming Device Passthrough
+
+Use `lsusb` and `lspci` to confirm that the devices desired to be accessible in the Docker container appear.
+
+### GPU Passthrough
+
+Check that TensorFlow/PyTorch can see the GPU:
+
+```python
+>>> # TensorFlow
+>>> import tensorflow as tf
+>>> tf.config.list_physical_devices('GPU')
+>>> tf.sysconfig.get_build_info()['cuda_version']
+>>> # PyTorch
+>>> import torch
+>>> torch.cuda.is_available()
+>>> torch.version.cuda
+```
+
+## Docker Aliases
 
 If you want some easy and quick shortcuts for using Docker consider taking a look at my [.dotfiles](https://github.com/s7117/.dotfiles) GitHub repository!
 
