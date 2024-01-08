@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:20.04
 
 # ENV
 ENV DEBIAN_FRONTEND=noninteractive
@@ -29,9 +29,8 @@ RUN usermod -aG sudo user
 RUN passwd --lock root
 RUN echo 'user:change-this-2024' | chpasswd
 
-WORKDIR /home/user
-
 USER user
+WORKDIR /home/user
 
 # Command
 CMD [ "/bin/bash" ]

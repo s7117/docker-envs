@@ -29,11 +29,11 @@ RUN usermod -aG sudo user
 RUN passwd --lock root
 RUN echo 'user:change-this-2024' | chpasswd
 
-# Clone the nvidia cuda tools
-RUN su - user -c "git clone https://github.com/NVIDIA/cuda-samples.git /home/user/cuda_samples"
-
 USER user
 WORKDIR /home/user
+
+# Clone the nvidia cuda tools
+RUN git clone https://github.com/NVIDIA/cuda-samples.git /home/user/cuda_samples
 
 # Command
 CMD [ "/bin/bash" ]

@@ -29,28 +29,27 @@ RUN usermod -aG sudo user
 RUN passwd --lock root
 RUN echo 'user:change-this-2024' | chpasswd
 
+USER user
 WORKDIR /home/user
 
 # Setup Miniforge3
-RUN su - user -c "mkdir /home/user/.miniforge3"
-RUN su - user -c 'wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh"'
-RUN su - user -c "chmod 700 ./Miniforge3*.sh"
-RUN su - user -c "./Miniforge3-Linux-x86_64.sh -b -p /home/user/.miniforge3 -f"
-RUN su - user -c "rm ./Miniforge3*"
-RUN su - user -c "/home/user/.miniforge3/bin/conda init bash"
-RUN su - user -c "/home/user/.miniforge3/bin/mamba init bash"
+RUN mkdir /home/user/.miniforge3
+RUN wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh"
+RUN chmod 700 ./Miniforge3*.sh
+RUN ./Miniforge3-Linux-x86_64.sh -b -p /home/user/.miniforge3 -f
+RUN rm ./Miniforge3*
+RUN /home/user/.miniforge3/bin/conda init bash
+RUN /home/user/.miniforge3/bin/mamba init bash
 
 # Install ML Tools in Conda Env
-RUN su - user -c "/home/user/.miniforge3/bin/mamba create --name torchgpu python=3.11 -y"
-RUN su - user -c "/home/user/.miniforge3/envs/torchgpu/bin/python3 -m \
+RUN /home/user/.miniforge3/bin/mamba create --name torchgpu python=3.11 -y
+RUN /home/user/.miniforge3/envs/torchgpu/bin/python3 -m \
   pip install torch torchvision torchaudio \
-  --index-url https://download.pytorch.org/whl/cu118"
+  --index-url https://download.pytorch.org/whl/cu118
 
-RUN su - user -c "/home/user/.miniforge3/bin/mamba create --name tfgpu python=3.11 -y"
-RUN su - user -c "/home/user/.miniforge3/envs/tfgpu/bin/python3 -m \
-  pip install tensorflow"
-
-USER user
+RUN /home/user/.miniforge3/bin/mamba create --name tfgpu python=3.11 -y
+RUN /home/user/.miniforge3/envs/tfgpu/bin/python3 -m \
+  pip install tensorflow
 
 # Command
 CMD [ "/bin/bash" ]

@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
+FROM ubuntu:22.04
 
 # ENV
 ENV DEBIAN_FRONTEND=noninteractive
@@ -31,9 +31,6 @@ RUN echo 'user:change-this-2024' | chpasswd
 
 USER user
 WORKDIR /home/user
-
-# Clone the nvidia cuda tools
-RUN git clone https://github.com/NVIDIA/cuda-samples.git /home/user/cuda_samples
 
 # Command
 CMD [ "/bin/bash" ]
