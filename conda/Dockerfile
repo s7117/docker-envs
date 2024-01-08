@@ -1,35 +1,8 @@
-FROM ubuntu:22.04
-
-# ENV
-ENV DEBIAN_FRONTEND=noninteractive
-ENV DISPLAY=host.docker.internal:0.0
-ENV TERM=xterm-256color
-
-# Set Timezone
-ENV TZ=America/New_York
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+FROM s7117/ubuntu-base:latest
 
 # Update
 RUN apt-get update -y
 RUN apt-get upgrade -y
-
-# Install Packages
-RUN apt-get install apt-utils \
-  sudo vim git wget curl locales ssh htop \
-  build-essential usbutils \
-  g++ make unzip zip zsh \
-  dos2unix x11-apps -y
-
-# Set locale
-RUN locale-gen en_US.UTF-8
-
-# Create a new user
-RUN adduser user --shell /bin/bash --disabled-password --home /home/user --gecos ""
-RUN usermod -aG sudo user
-RUN passwd --lock root
-RUN echo 'user:change-this-2024' | chpasswd
-
-WORKDIR /home/user
 
 # Setup Miniforge3
 RUN su - user -c "mkdir /home/user/.miniforge3"
@@ -39,6 +12,8 @@ RUN su - user -c "./Miniforge3-Linux-x86_64.sh -b -p /home/user/.miniforge3 -f"
 RUN su - user -c "rm ./Miniforge3*"
 RUN su - user -c "/home/user/.miniforge3/bin/conda init bash"
 RUN su - user -c "/home/user/.miniforge3/bin/mamba init bash"
+
+WORKDIR /home/user
 
 USER user
 

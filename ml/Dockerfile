@@ -1,6 +1,8 @@
 FROM s7117/ubunut-conda:latest
 
-WORKDIR /home/user
+# Update
+RUN apt-get update -y
+RUN apt-get upgrade -y
 
 # Install ML Tools in Conda Env
 RUN su - user -c "/home/user/.miniforge3/bin/mamba create --name torchenv python=3.11 -y"
@@ -11,6 +13,8 @@ RUN su - user -c "/home/user/.miniforge3/envs/torchenv/bin/python3 -m \
 RUN su - user -c "/home/user/.miniforge3/bin/mamba create --name tfenv python=3.11 -y"
 RUN su - user -c "/home/user/.miniforge3/envs/tfenv/bin/python3 -m \
   pip install tensorflow"
+
+WORKDIR /home/user
 
 USER user
 
