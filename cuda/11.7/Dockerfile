@@ -27,7 +27,7 @@ RUN locale-gen en_US.UTF-8
 RUN adduser user --shell /bin/bash --disabled-password --home /home/user --gecos ""
 RUN usermod -aG sudo user
 RUN passwd --lock root
-RUN echo 'user:temp2023' | chpasswd
+RUN echo 'user:change-this-2024' | chpasswd
 
 # Clone the nvidia cuda tools
 RUN su - user -c "git clone https://github.com/NVIDIA/cuda-samples.git /home/user/cuda_samples"

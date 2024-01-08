@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM s7117/ubuntu-base:latest
 
 # ENV
 ENV DEBIAN_FRONTEND=noninteractive
@@ -33,7 +33,7 @@ RUN locale-gen en_US.UTF-8
 RUN adduser user --shell /bin/bash --disabled-password --home /home/user --gecos ""
 RUN usermod -aG sudo user
 RUN passwd --lock root
-RUN echo 'user:temp2023' | chpasswd
+RUN echo 'user:change-this-2024' | chpasswd
 
 USER user
 WORKDIR /home/user

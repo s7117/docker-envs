@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
+FROM ubuntu:22.04
 
 # ENV
 ENV DEBIAN_FRONTEND=noninteractive
@@ -29,11 +29,18 @@ RUN usermod -aG sudo user
 RUN passwd --lock root
 RUN echo 'user:change-this-2024' | chpasswd
 
-# Clone the nvidia cuda tools
-RUN su - user -c "git clone https://github.com/NVIDIA/cuda-samples.git /home/user/cuda_samples"
+WORKDIR /home/user
+
+# Setup Miniforge3
+RUN su - user -c "mkdir /home/user/.miniforge3"
+RUN su - user -c 'wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh"'
+RUN su - user -c "chmod 700 ./Miniforge3*.sh"
+RUN su - user -c "./Miniforge3-Linux-x86_64.sh -b -p /home/user/.miniforge3 -f"
+RUN su - user -c "rm ./Miniforge3*"
+RUN su - user -c "/home/user/.miniforge3/bin/conda init bash"
+RUN su - user -c "/home/user/.miniforge3/bin/mamba init bash"
 
 USER user
-WORKDIR /home/user
 
 # Command
 CMD [ "/bin/bash" ]
