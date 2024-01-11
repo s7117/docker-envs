@@ -1,4 +1,4 @@
-FROM s7117/ubuntu-base:latest
+FROM s7117/ubuntu-base:22.04
 
 USER root
 

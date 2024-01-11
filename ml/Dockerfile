@@ -1,4 +1,4 @@
-FROM s7117/ubunut-conda:latest
+FROM s7117/ubunut-conda:22.04
 
 USER root
 

@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:latest
 
 # ENV
 ENV DEBIAN_FRONTEND=noninteractive
@@ -18,7 +18,7 @@ RUN apt-get install apt-utils \
   sudo vim git wget curl locales ssh htop \
   build-essential usbutils \
   g++ make unzip zip zsh \
-  dos2unix x11-apps rsync -y
+  dos2unix x11-apps -y
 
 # Set locale
 RUN locale-gen en_US.UTF-8

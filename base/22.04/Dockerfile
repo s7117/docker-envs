@@ -18,7 +18,7 @@ RUN apt-get install apt-utils \
   sudo vim git wget curl locales ssh htop \
   build-essential usbutils \
   g++ make unzip zip zsh \
-  dos2unix x11-apps -y
+  dos2unix x11-apps rsync -y
 
 # Set locale
 RUN locale-gen en_US.UTF-8
