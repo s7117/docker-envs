@@ -27,6 +27,8 @@ WORKDIR /home/user
 
 # Add ROS to .bashrc
 RUN echo "source /opt/ros/noetic/setup.bash" >> /home/user/.bashrc
+RUN echo "export ROS_IP=127.0.0.1" >> /home/user/.bashrc
+RUN echo "export ROS_MASTER_URI=http://localhost:11311" >> /home/user/.bashrc
 RUN rosdep update
 
 # Setup Tutorials
