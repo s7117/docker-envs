@@ -32,8 +32,5 @@ RUN echo 'user:change-this-2025' | chpasswd
 USER user
 WORKDIR /home/user
 
-# Clone the nvidia cuda tools
-RUN git clone https://github.com/NVIDIA/cuda-samples.git /home/user/cuda_samples
-
 # Command
 CMD [ "/bin/bash" ]
