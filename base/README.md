@@ -1,6 +1,6 @@
-# Ubuntu Docker Development Environment
+# Ubuntu Minimal Docker Development Environment
 
-**_WARNING: Be sure to change the password for the user immediately after creating the container!_**
+**_WARNING: A default password has been set for the default user called `user`. The default password is `change-this-2025`. Use `passwd` along with this password to change the default password!_**
 
 ## Configuration/Installation
 
@@ -17,6 +17,6 @@ Optionally, you can add the `--restart unless-stopped` to the `docker run` comma
 
 ## Installing Other Packages:
 
-The user password is `temp2023`. It is advised to reset this password as soon as possible upon creating the container.
+The user password is `change-this-2025`. It is advised to reset this password as soon as possible upon creating the container.
 
-Use `passwd` and `temp2023` to change the default password to a new password.
+Use `passwd` and `change-this-2025` to change the default password to a new password.

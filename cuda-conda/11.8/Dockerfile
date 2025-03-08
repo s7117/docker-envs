@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
 
 # ENV
 ENV DEBIAN_FRONTEND=noninteractive
@@ -18,7 +18,7 @@ RUN apt-get install apt-utils \
   sudo vim git wget curl locales ssh htop \
   build-essential usbutils \
   g++ make unzip zip zsh \
-  dos2unix x11-apps rsync iproute2 -y
+  dos2unix x11-apps -y
 
 # Set locale
 RUN locale-gen en_US.UTF-8
@@ -31,6 +31,15 @@ RUN echo 'user:change-this-2025' | chpasswd
 
 USER user
 WORKDIR /home/user
+
+# Setup Miniforge3
+RUN mkdir /home/user/.miniforge3
+RUN wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh"
+RUN chmod 700 ./Miniforge3*.sh
+RUN ./Miniforge3-Linux-x86_64.sh -b -p /home/user/.miniforge3 -f
+RUN rm ./Miniforge3*
+RUN /home/user/.miniforge3/bin/conda init bash
+RUN /home/user/.miniforge3/bin/mamba init bash
 
 # Command
 CMD [ "/bin/bash" ]

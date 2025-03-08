@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM nvidia/cuda:12.2.2-devel-ubuntu22.04
 
 # ENV
 ENV DEBIAN_FRONTEND=noninteractive
@@ -18,7 +18,7 @@ RUN apt-get install apt-utils \
   sudo vim git wget curl locales ssh htop \
   build-essential usbutils \
   g++ make unzip zip zsh \
-  dos2unix x11-apps rsync iproute2 -y
+  dos2unix x11-apps -y
 
 # Set locale
 RUN locale-gen en_US.UTF-8
@@ -31,6 +31,9 @@ RUN echo 'user:change-this-2025' | chpasswd
 
 USER user
 WORKDIR /home/user
+
+# Clone the nvidia cuda tools
+RUN git clone https://github.com/NVIDIA/cuda-samples.git /home/user/cuda_samples
 
 # Command
 CMD [ "/bin/bash" ]

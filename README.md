@@ -4,6 +4,8 @@ A simple Dockerfile for an Ubuntu 22.04 development environment. Portable for us
 
 As of now these environments are only on Ubuntu but in theory should be able to be ported to other distros by changing the `FROM` at the beginning of the Dockerfile. Keep in mind you may need to change the package manager and other distro-specific commands in the Dockerfile.
 
+**_WARNING: A default password has been set for the default user called `user`. The default password is `change-this-2025`. Use `passwd` along with this password to change the default password!_**
+
 ## Basic Usage:
 
 While the basic use command will work, looking at the `readme.md` file in each respective directory will yield better results and more granular functionality.

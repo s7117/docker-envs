@@ -17,6 +17,6 @@ Optionally, you can add the `--restart unless-stopped` to the `docker run` comma
 
 ## Installing Other Packages:
 
-The user password is `temp2023`. It is advised to reset this password as soon as possible upon creating the container.
+The user password is `change-this-2025`. It is advised to reset this password as soon as possible upon creating the container.
 
-Use `passwd` and `temp2023` to change the default password to a new password.
+Use `passwd` and `change-this-2025` to change the default password to a new password.

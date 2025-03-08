@@ -29,7 +29,7 @@ RUN locale-gen en_US.UTF-8
 RUN adduser user --shell /bin/bash --disabled-password --home /home/user --gecos ""
 RUN usermod -aG sudo user
 RUN passwd --lock root
-RUN echo 'user:change-this-2024' | chpasswd
+RUN echo 'user:change-this-2025' | chpasswd
 
 
 ########## OPENVINO ##########
