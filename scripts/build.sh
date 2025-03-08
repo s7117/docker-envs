@@ -8,13 +8,13 @@ echo "### LOG --> Created build environment..."
 # Base
 docker buildx build -f ./base/20.04/Dockerfile --no-cache \
                         --platform linux/amd64,linux/arm64 --push base \
-                        --tag s7117/ubuntu-cuda:20.04
+                        --tag s7117/ubuntu-base:20.04
 docker buildx build -f ./base/22.04/Dockerfile --no-cache \
                         --platform linux/amd64,linux/arm64 --push base \
-                        --tag s7117/ubuntu-cuda:22.04
+                        --tag s7117/ubuntu-base:22.04
 docker buildx build -f ./base/latest/Dockerfile --no-cache \
                         --platform linux/amd64,linux/arm64 --push base \
-                        --tag s7117/ubuntu-cuda:latest
+                        --tag s7117/ubuntu-base:latest
 echo "### LOG --> Base images built..."
 echo "### LOG --> Pushing images..."
 # docker push s7117/ubuntu-base:20.04
