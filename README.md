@@ -53,9 +53,10 @@ See [docs/common-docker.md](docs/common-docker.md) for some common docker comman
 ## Environments
 
 - [ubuntu-base](base/) - Customized Ubuntu Development Environment
+- [ubuntu-conda](conda/) - Ubuntu Image with Miniforge3 installed
+- [ubuntu-coraltpu](coraltpu/) - Ubuntu Image with the Coral TPU tools installed
 - [ubuntu-cuda](cuda/) - Customized CUDA Image
-- [ubuntu-cuda-ml](cuda-ml/) - Machine Learning Image with PyTorch (torchgpu) and TensorFlow GPU (tfgpu) installed under Miniforge3
-- [ubuntu-ml](ml/) - Machine Learning Image with PyTorch (torchgpu) and TensorFlow CPU (tfgpu) installed under Miniforge3
+- [ubuntu-cuda-conda](cuda-conda/) - CUDA Images with Miniforge3 installed
 
 ## Confirming Device Passthrough
 
